@@ -1,0 +1,48 @@
+<!-- Page Content -->
+<script src="//kendo.cdn.telerik.com/2016.3.914/js/kendo.all.min.js"></script>
+<div id="page-content-wrapper">
+	<!-- breadcrumb -->
+	<ul class="breadcrumb">
+		<li class="breadcrumb-item"><a class="dec-none" href="#!dashboard">Dashboard</a></li>
+		<li class="breadcrumb-item active">Reports</li>
+	</ul>
+	<!-- /breadcrumb-->
+	<div class="container-fluid ">
+		<div class="row">
+			<div class="col-md-12 col-xs-12">
+				<div class="panel-group">
+					<div class="panel panel-default">
+						<div class="panel-heading">Reports</div>
+						<div class="panel-body table-responsive">
+							<div class="row">
+								<div class="col-md-3 col-sm-6 col-xs-12" data-ng-repeat="result in totalResults | orderBy : 'excDate' : true track by $index">
+									<div class=" col-md-12 col-sm-6 col-xs-12 card-box tilebox-three text-capitalize" ng-click="test.getReport(result)" ng-class="result.app.fileName.includes('.apk') ? 'android-icon' :(result.app.fileName.includes('.ipa') ?'apple-icon' :'default-icon') ">
+										
+											<div class="col-md-4 col-sm-6 col-xs-12  medium-icon pull-xs-left pad-none">
+												<img class="medium-icon" ng-src="{{result.icon}}" alt="{{result.AppName}}">
+											</div>
+
+											<div class=" col-md-8 col-sm-6 col-xs-12 text-margin-right-50 pad-none">
+												<h5>{{result.testName}}</h5>
+												<h5 class="text-dark-blue">{{result.testSenario}} /<br> {{result.testType}}</h5>
+												<h5 class="text-dark-blue">{{result.AppName}}</h5>
+												<p class="small">Version: <span>{{result.version}}</span></p>
+												<p class="small">{{result.deviceName}}</p>
+												<p class="small text-success">{{result.excTime}}</p>
+											</div>
+										
+									</div>
+									
+								</div>
+								<div ng-if="reportsError && !totalResults.length" class="widget-tab ng-scope" style="text-align: center; margin-top: 20px">
+										<span style=" font-size: 16px;">You don't have any activites as of now. </span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- /#page-content-wrapper --> 
+</div>

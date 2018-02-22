@@ -1,0 +1,55 @@
+<!-- Page Content -->
+<div id="page-content-wrapper">
+	<!-- breadcrumb-->
+	<ul class="breadcrumb">
+		<li class="breadcrumb-item"><a class="dec-none" ui-sref="home.dashboard">Dashboard</a></li>
+		<li class="breadcrumb-item"><a class="dec-none" ui-sref="home.dashboard">My Apps</a></li>
+		<li class="breadcrumb-item"><a class="dec-none" ui-sref="home.newManualTest">New Manual Test</a></li>
+		<li class="breadcrumb-item active">Upload Test</li>
+	</ul>
+	<!--bredcrumb-->
+	<div class="container-fluid " data-ng-repeat="app in currentApp">
+		<div class="row">
+			<div class="col-md-12 col-xs-12">
+				<div class="panel-group">
+					<div class="panel panel-default">
+						<div class="panel-heading">Upload Test</div>
+						<div class="panel-body table-responsive">
+								<div class="row bottom-20">
+								<div class="col-md-12 col-xs-12">
+									<div class="col-md-12 col-xs-12">
+										<div class="pull-left padding-rt-30"><img class="icon-medium" ng-src="{{app.icon}}" onerror="this.src=this.alt;"  alt="{{app.defaultIcon}}"></div>
+										<div class="pull-left">
+											<div>App Name : <label>{{app.appName}}</label></div>
+											<div>Version: <label>{{app.version}}</label></div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="row bottom-20">
+								<div class="col-md-12 col-xs-12">
+									<div class="pwd-changeform-txt top-lable">
+										<div class="col-md-5">
+											<input type='file' class="form-control col-md-5"></input>
+											
+										</div>
+										<div class="col-md-2 add-btn-mobile"> <button class="btn btn-sm btn-success pd-rt-lt-30" style="margin-left:10px;">Upload</button></div>
+									</div>
+								</div>
+								<div class="clearfix"></div>
+							</div>
+							<div class="row">
+								<div class="col-md-12 col-xs-12">
+									<div class="col-md-2"></div>
+									<div class="col-md-3"><a ui-sref="home.uploadTestCase/{{app.id}}"></a></div>
+								</div>
+								<div class="clearfix"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- /#page-content-wrapper --> 
+</div>

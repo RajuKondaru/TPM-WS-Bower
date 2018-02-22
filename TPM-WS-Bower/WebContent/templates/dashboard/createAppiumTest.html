@@ -1,0 +1,36 @@
+
+<div class="panel-group">
+   <div class="panel panel-default">
+      <div class="panel-heading">Appium Test Creation</div>
+      <div class="panel-body table-responsive">
+         
+         <form style="margin-bottom: 20px;" enctype="multipart/form-data">
+            <div class="centered" style="margin: auto; width: 30%;">
+                      
+               <div class="input-group">
+		   			<input type="text" class="form-control" ng-model='appiunTestName'>
+				   <span class="input-group-btn">
+				        <button class="btn btn-default" type="button" ng-click='save(appiunTestName, test.app)'>Create</button>
+				   </span>
+				</div>
+		
+            </div>
+        </form>
+     	<div class="row note-flex">
+			<div class="col-md-12 alert alert-info centered">
+			    <strong>Note : </strong> TestPace supports Appium versions upto v1.6.4
+			</div>
+		</div>
+                
+      </div>
+      <script type="text/ng-template" id="TestNameComformModel.html">
+											        <div class="modal-header">
+											            <h3 class="modal-title">{{test.type}} Test #{{test.name}} created Successfully!</h3>
+											        </div>
+											        <div class="modal-footer">
+											            <button class="btn btn-primary" ng-click="ok()">Ok</button>
+											          
+											        </div>
+	 </script>
+   </div>
+</div>

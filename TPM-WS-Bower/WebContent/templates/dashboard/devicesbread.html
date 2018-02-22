@@ -1,0 +1,9 @@
+<li class="breadcrumb-item"><a class="dec-none" ui-sref="home.dashboard">Dashboard</a></li>
+<li class="breadcrumb-item"><a class="dec-none" ui-sref="home.dashboard">My Apps</a></li>
+<li class="breadcrumb-item text-capitalize"><a class="dec-none" ui-sref="home.activities/{{test.senario}}">{{test.senario}}</a></li>
+<li class="breadcrumb-item text-capitalize" ng-if="test.senario!='manual'" >
+	<a class="dec-none" ng-if="test.type=='robotium'" ui-sref="home.robotiumAUTfileupload/{{test.type}}">{{test.type}}</a>
+	<a class="dec-none" ng-if="test.type=='appium'"ui-sref="home.appiumTestCreation/{{test.type}}">{{test.type}}</a>
+</li>
+<li class="breadcrumb-item text-capitalize"><a class="dec-none" ui-sref="home.newTest">New Test</a></li>
+<li class="breadcrumb-item active">Select Device</li>

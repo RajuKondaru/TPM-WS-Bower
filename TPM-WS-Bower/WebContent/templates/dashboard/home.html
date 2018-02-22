@@ -1,0 +1,56 @@
+<div class="top-header">
+			<div class="container-fluid">
+				<div class="row" style="background-size:cover !important; background-color: #!ededeb !important; background-image: linear-gradient(rgba(255,255,255,0.5),rgba(255,255,255,0.5)), url('./images/banner2.png');">
+					<div class="col-md-10 col-xs-6">
+						<!-- Brand and toggle get grouped for better mobile display -->
+						<div class="navbar-header fixed-brand">
+							<button type="button" class="navbar-toggle collapsed" data-toggle="collapse"  id="menu-toggle"> <span class="fa fa-navicon" aria-hidden="true"></span> </button>
+							<a  ui-sref="home.dashboard"> <img src="images/logo.png" alt="TPM"></a>
+						</div>
+						<!-- navbar-header-->
+						<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+							<ul class="nav navbar-nav">
+								<li class="active" >
+									<button class="navbar-toggle collapse in" data-toggle="collapse" id="menu-toggle-2"> <span class="fa fa-navicon" aria-hidden="true"></span></button>
+								</li>
+							</ul>
+						</div>
+						<!-- bs-example-navbar-collapse-1 -->
+					</div>
+					<div class="col-md-2 col-xs-6 pull-right">
+						<ul class="nav navbar-right">
+							<li class="dropdown">
+								<div class="dropdown-toggle profile-name" data-toggle="dropdown" aria-expanded="false"> <i class="fa fa-user"></i><span>{{user.userName}} </span> <b class="caret" style="color:#!333;"></b> </div>
+								<ul class="dropdown-menu animated flipInX">
+									<li> <a ui-sref="home.userdetails"><i class="fa fa-fw fa-gear"></i>Account Details</a> </li>
+									<li class="divider"></li>
+									<li> <a ui-sref="main.logout"><i class="fa fa-fw fa-power-off"></i> Log Out</a> </li>
+								</ul>
+							</li>
+						</ul>
+
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- Start wrapper -->
+		<div id="wrapper">
+			<!-- Sidebar -->
+			<div id="sidebar-wrapper" class="side-menu">
+				<ul class="sidebar-nav nav-stacked" id="menu">
+					<!-- <li class="active"> <a href="#!dashboard"><span class="fa-stack fa-lg pull-left"><i class="fa fa-dashboard fa-stack-1x "></i></span> Dashboard</a> </li> -->
+					<li class="active"> <a ui-sref="home.dashboard"><span class="fa-stack fa-lg pull-left"><i class="fa fa-fw fa-th fa-stack-1x "></i></span>My Apps</a> </li>
+					<li> <a ui-sref="home.devicelab"><span class="fa-stack fa-lg pull-left"><i class="fa fa-fw fa-mobile-phone fa-stack-1x "></i></span>Device Lab</a> </li>
+					<li> <a ui-sref="home.reports"><span class="fa-stack fa-lg pull-left"><i class="fa fa-fw fa-bar-chart-o fa-stack-1x "></i></span>Reports</a> </li>
+					<li> <a ui-sref="home.bugs"><span class="fa-stack fa-lg pull-left"><i class="fa fa-fw fa-bug fa-stack-1x "></i></span>Bugs</a> </li>
+					<li> <a ui-sref="home.support"><span class="fa-stack fa-lg pull-left"><i class="fa fa-fw fa-support fa-stack-1x "></i></span>Support</a> </li>
+				</ul>
+			</div>
+			<!-- /#sidebar-wrapper -->
+			<!-- Page Content -->
+			<div>{{test}}</div>
+			<div id="page-view" autoscroll="true" ui-view="sub"></div>
+
+			<!-- End wrapper -->
+		</div>
+  

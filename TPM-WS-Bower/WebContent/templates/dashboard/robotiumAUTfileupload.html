@@ -1,0 +1,28 @@
+
+  <div class="panel-group">
+     <div class="panel panel-default">
+        <div class="panel-heading">Upload AUT File</div>
+        <div class="panel-body table-responsive min-manel-h dbox">
+        <div class="auto-margin">
+        	<div class="col-md-12 col-sm-6 col-xs-12">
+	           <form enctype="multipart/form-data">
+	              <div class="centered">
+	                 <input id='appfile' type="file" class="filestyle" onchange="angular.element(this).scope().setFile(this)" name="file" data-buttonName="btn-primary">
+	              </div>
+	           </form>
+	       </div>
+        </div>
+        </div>
+     </div>
+  </div>
+  <div id="myNav" class="overlay">
+  	<a href="javascript:void(0)" class="closebtn" onclick="javascript:document.getElementById('myNav').style.display = 'none';">&times;</a>
+	  <div class="overlay-content">
+	    <div class="progress" style="display: none; margin: auto; width: 50%;">
+	       <div id='progressbar' class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width:10%"></div>
+	    </div>
+	     <div id="message" style="margin: 10px; font-size: medium;"></div>
+	  </div>
+ </div>
+ 
+    

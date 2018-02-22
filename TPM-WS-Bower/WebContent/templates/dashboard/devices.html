@@ -1,0 +1,66 @@
+
+<div class="panel-group">
+	<div class="panel panel-default">
+		<div class="panel-heading">Devices</div>
+		
+		<div class="panel-body min-manel-h dbox table-responsive">
+			<div class="row max-width">
+				<div class="col-md-12 col-sm-12 col-xs-12 bottom-10">
+					<input type="text" class="form-control" ng-model = "DeviceName" placeholder="Search Configuration">
+				</div>
+			
+				<div class="col-md-12 col-sm-12 col-xs-12" style="height: 80%; overflow-x: auto; ">
+					<div data-ng-if="devices.length " data-ng-class="device.DeviceType!='free'?'div-disabled':''" class="col-md-4 col-sm-6 col-xs-12" data-ng-repeat="device in devices | filter: DeviceName ">
+						<input type="checkbox" id="{{device.DeviceUDID}} " style="display: none" ng-model="selectedDevices[device.DeviceUDID]"/>
+            			<label for="{{device.DeviceUDID}} "> 
+	            			<div class="box box-default ui-ribbon-container ui-ribbon-danger">
+								<div class="ui-ribbon-wrapper" >
+									<div class="ui-ribbon text-capitalize" data-ng-class="device.DeviceType=='free'?'label-green':''">
+										{{device.DeviceType}}
+									</div>
+								</div>
+								
+								<div class="box-body text-center">
+									<img class='img-device' data-ng-src="{{device.Icon}}">
+									<h6 class='text-capitalize'>{{device.Manufacturer}} - {{device.DeviceName}} {{device.Model}}</h4>
+									<p class="small">{{device.Plateform}} - {{device.Version}}</p>
+									<p class="small">Resolution : {{device.Resolution}}</p>
+									
+									<div  data-ng-if="test.type!='appium'" class="label-green" data-ng-class="device.UsageStatus == 'Available' ? 'label-green' : 'label-red'" data-ng-disabled="device.UsageStatus != 'Available'" >{{device.UsageStatus}}</div>
+									<div  data-ng-if="test.type=='appium'" class="label-green" data-ng-class="device.UsageStatus == 'Available' ? 'label-green' : 'label-red'" data-ng-disabled="device.UsageStatus != 'Available'"  >{{device.UsageStatus}}</div>
+									
+								</div>
+							</div>
+            			
+            			
+            			</label>
+						
+					</div>
+					<div ng-if="!devices.length && !error" class="col-xs-12 loader-wrapper" id="loader-3">
+			        	<div id="loader"></div>
+				        <div id="loader"></div>
+				        <div id="loader"></div>
+				        <div id="loader"></div>
+				        <div id="loader"></div>
+				        <div style="text-align: center; margin-top: 20px"><div class="alert" role="alert"> <h4 class="alert-heading">Getting All Devices!</h4></div></div>
+		   			</div>
+		   			<div ng-if="error" class="col-xs-12 loader-wrapper" id="loader-3">
+		             	<div style="text-align: center; margin-top: 20px"><div class="alert" role="alert"> <h4 class="alert-heading">{{error}}</h4></div></div>
+		   			</div>
+				</div>
+				<div class="col-md-12 col-sm-12 col-xs-12" style="height: 10%;">
+					<!-- <a data-ng-if="test.type!='appium'" class='pull-xs-right pad-right30' ui-sref="home.app.selectedLaunch({deviceId:device.DeviceUDID})" >
+						<button type="button" class="btn btn-md btn-blue pull-xs-right pad-right30"  >Save</button>
+					</a>
+					<a data-ng-if="test.type=='appium'" class='pull-xs-right pad-right30'  ui-sref="home.app.capabilities({deviceId:device.DeviceUDID})" > -->
+						<button type="button" class="btn btn-md btn-blue pull-xs-right pad-right30"   data-ng-click="submitDevices(test.type)">Save</button>
+					<!-- </a> -->
+				</div>
+			</div>
+			
+			
+			
+		</div>
+	</div>
+</div>
+		

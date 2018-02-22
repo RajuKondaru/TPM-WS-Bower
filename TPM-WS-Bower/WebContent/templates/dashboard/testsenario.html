@@ -1,0 +1,77 @@
+<!-- Page Content -->
+<div ng-show="test.senario!='manual'" >
+	<div class="panel-group">
+		<div class="panel panel-default">
+			<div class="panel-heading col-md-12 col-xs-12">
+				<div class="col-md-12 col-xs-12 ">
+						Type of Testing Senario
+						
+				</div>
+			</div>
+			<div class="panel-body table-responsive min-manel-h dbox">
+			
+					<div class="auto-margin">
+						<div class="col-md-6 col-sm-6 col-xs-12">
+							<a ui-sref="home.app.appium({type:appium})" class='none-dec'>
+								<div class="card-box tilebox-three text-center extralarge-icon pading-60 no-margin">
+									<img src="./images/appium-icon.jpg" alt="appium">
+									<h4 class="text-deafult">Appium</h4>
+									<input style='display: none;' ng-model="appium" ng-init="appium ='appium'"></input> 
+								</div>
+							</a>
+						</div>
+						<div class="col-md-6 col-sm-6 col-xs-12">
+							<a ui-sref="home.app.robotium({type:robotium})" class='none-dec'>
+								<div class="card-box tilebox-three text-center extralarge-icon pading-60 no-margin">
+									<img src="./images/robotium-icon.jpg" alt="robotium"> 
+									<h4 class="text-deafult">Robotium</h4>
+									<input style='display: none;' ng-model="robotium" ng-init="robotium ='robotium'"></input> 
+								</div>
+							</a>
+						</div>
+					</div>
+				
+			</div>
+		</div>
+	</div> 
+		
+	
+	
+</div>
+<!-- Page Content -->
+<div ng-show="test.senario!='automation'"  >
+	<div class="panel-group">
+		<div class="panel panel-default">
+			<div class="panel-heading col-md-12 col-xs-12">
+				<div class="col-md-12 col-xs-12 ">
+						Type of Testing Senario
+						
+				</div>
+			</div>
+			<div class="panel-body table-responsive min-manel-h dbox">
+			
+					<div class="auto-margin">
+						<div class="col-md-6 col-sm-6 col-xs-6">
+							<div class="card-box tilebox-three text-center pading-60 no-margin" >
+								<a ui-sref="home.app.writeTest" class='none-dec'>
+									<div class="extralarge-icon no-margin" ><img src="images/writetest.png" alt="manual"> </div>
+									<h4 class="text-deafult">Write Test</h4>
+								</a>
+							</div>
+						</div>
+						<div class="col-md-6 col-sm-6 col-xs-6"> 
+							<div class="card-box tilebox-three text-center pading-60 no-margin">
+								<a ui-sref="home.app.uploadTest" class='none-dec'>
+									<div class="extralarge-icon no-margin" ><img src="images/upload5.png" alt="manual"> </div>
+									<h4 class="text-deafult">Upload Test</h4>
+								</a>
+							</div>
+						</div>
+					</div>
+				
+			</div>
+		</div>
+	</div> 
+
+
+</div>

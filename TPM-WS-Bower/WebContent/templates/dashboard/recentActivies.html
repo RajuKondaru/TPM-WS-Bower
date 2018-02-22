@@ -1,0 +1,116 @@
+<div class="panel-group">
+	<div class="panel panel-default">
+		<div class="panel-heading col-md-12 col-xs-12">
+			<div class="col-md-8 col-xs-12 ">
+					List of Automation Tests on #{{test.app.appName}}
+					
+				</div>
+				<div class="col-md-4 col-xs-12 ">
+					<div class="pull-right "><a ui-sref="home.app.activities.senario"><button type="button" class="btn btn-sm btn-blue btn-pad">
+						<i class="fa fa-plus-circle"></i> New Test</button></a>
+					</div>
+				</div></div>
+		<div class="panel-body table-responsive min-manel-h">
+			<div class="row">
+				<div class="col-md-12 col-xs-12" >
+					<div class="col-md-12 col-xs-12 pad-none" >
+						<div class="table-responsive" ng-if="totalAutoResults.length">
+
+				<table class="table table-striped table-hover text-capitalize">
+					<thead>
+						<tr>
+							<th>Name</th>
+							<th>Device</th>
+							<th>Result</th>
+							<th>Status</th>
+							<th>Issue</th>
+						</tr>
+					</thead>
+					<tbody ng-if="totalAutoResults.length"  >
+							<tr data-ng-repeat="result in totalAutoResults | orderBy :'excDate' : true track by $index " ng-click="test.getReport(result)" >
+								<td>{{result.testName}}</td>
+								<td>{{result.deviceName}}</td>
+								<td>
+									<div class="label label-table label-success">Pass</div>
+								</td>
+								<td>
+									{{result.testType}} Reports #{{result.testName}} has finished {{result.excTime}}
+								</td>
+								<td>
+									you haven't created any issues yet.
+								</td>
+							</tr>
+
+					</tbody>
+				</table>
+			</div>
+			<div >
+				<div ng-if="!reportError && !totalAutoResults.length" class="col-xs-12 loader-wrapper" id="loader-3">
+		        	<div id="loader"></div>
+			        <div id="loader"></div>
+			        <div id="loader"></div>
+			        <div id="loader"></div>
+			        <div id="loader"></div>
+			        <div style="text-align: center; margin-top: 20px"><div class="alert" role="alert"> <h4 class="alert-heading">Loading Recent Activies. Please Wait..!</h4></div></div>
+		   		</div>
+		   		<div class="row">
+			   		<div ng-if="reportError && !totalAutoResults.length" class="widget-tab " style="text-align: center; margin-top: 20px"  >
+						<span style=" font-size: 16px;">You don't have any activites as of now. </span>
+					</div>
+				</div>
+			</div>
+			<div class="pull-right">
+				<!-- pager -->
+		            <ul data-ng-if="vm.pager.pages.length" class="pagination">
+		                <li data-ng-class="{disabled:vm.pager.currentPage === 1}">
+		                    <a data-ng-click="vm.setPage(1)">First</a>
+		                </li>
+		                <li data-ng-class="{disabled:vm.pager.currentPage === 1}">
+		                    <a data-ng-click="vm.setPage(vm.pager.currentPage - 1)">Previous</a>
+		                </li>
+		                <li data-ng-repeat="page in vm.pager.pages" data-ng-class="{active:vm.pager.currentPage === page}">
+		                    <a data-ng-click="vm.setPage(page)">{{page}}</a>
+		                </li>
+		                <li data-ng-class="{disabled:vm.pager.currentPage === vm.pager.totalPages}">
+		                    <a data-ng-click="vm.setPage(vm.pager.currentPage + 1)">Next</a>
+		                </li>
+		                <li data-ng-class="{disabled:vm.pager.currentPage === vm.pager.totalPages}">
+		                    <a data-ng-click="vm.setPage(vm.pager.totalPages)">Last</a>
+		                </li>
+		            </ul>
+
+			</div>
+						
+					</div>
+					
+				</div>
+			</div>
+			
+		</div>
+	</div>
+</div> 
+			
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

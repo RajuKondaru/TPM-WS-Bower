@@ -1,0 +1,47 @@
+<div class="activetab tab-pane fade in active">
+			<div class="row">
+				<div  class="col-md-3 col-sm-6 col-xs-12" data-ng-repeat="app in activeappinfo | orderBy: 'id':true | filter: appName  " >
+					<div class="col-md-12 col-sm-6 col-xs-12  card-box tilebox-three" ng-class="app.fileName.includes('.apk') ? 'android-icon' :(app.fileName.includes('.ipa') ?'apple-icon' :'default-icon') ">
+						<div class="row app-action">
+							<a href="home.delete({id:app.id})" style="text-decoration: none; "   >
+							<span class="pull-left icon-pointer"><i class="fa fa-trash-o"></i></span>
+							</a>
+							<a ui-sref="home.trash({id:app.id})"style="text-decoration: none; "   >
+							<span class="pull-right icon-pointer"><i class="fa fa-exchange small-icon"></i></span>
+							</a>
+						</div>
+						<a ui-sref="home.app({id:app.id})">
+							<h5 class="text-dark-blue app-title">{{app.appName}}</h5>
+							<div  class="col-md-12 col-sm-6 col-xs-12 pad-none">
+								<div  class="col-md-4 col-sm-6 col-xs-12 pad-rt">
+									<span>
+									<img class="large-icon"  onerror="this.src=this.alt;"  alt="{{app.defaultIcon}}" ng-src="{{app.icon}}" >
+									</span>
+								</div>
+								<div class="col-md-8 col-sm-6 col-xs-12 pad-r">
+
+									<p ng-if="app.appType=='native'" class="small">Build: <span>{{app.buildId}}</span></p>
+									<p ng-if="app.appType=='webapp'" class="small">URL: <span>{{app.webUrl}}</span></p>
+									<p class="small">Version: <span>{{app.version}}</span></p>
+									<p class="small">{{app.uploadedDate}}</p>
+								</div>
+
+							</div>
+
+						</a>
+					</div>
+				</div>
+				<div ng-if="!activeappinfo.length && !errorActive" class="col-xs-12 loader-wrapper" id="loader-3">
+		        <!--	<div id="loader"></div>
+			        <div id="loader"></div>
+			        <div id="loader"></div>
+			        <div id="loader"></div>
+			        <div id="loader"></div>-->
+							<cube-grid-spinner></cube-grid-spinner>
+			        <div style="text-align: center; margin-top: 20px"><div class="alert" role="alert"> <h4 class="alert-heading">Loading Active Apps. Please Wait..!</h4></div></div>
+		   		</div>
+				<div id="error" ng-if="!activeappinfo.length && errorActive" class=" widget-tab "   >
+					<span style=" font-size: 16px;">You don't have any active apps. Please look at <a href=".archivetab" class="navilink">archive</a> or <a  class="navilink" href="#!newapp">create</a> a new app.</span>
+				</div>
+			</div>
+		</div>

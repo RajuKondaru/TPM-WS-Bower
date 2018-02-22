@@ -1,0 +1,59 @@
+
+            <div class="panel-group">
+              
+               <div id="desiredCapabilitiesView" class="panel panel-default">
+                  <div class="panel-heading">Desired Capabilities</div>
+                  <div class="panel-body min-manel-h table-responsive">
+                     <div data-ng-if="test.app.appType==='native'" class="col-sm-12 col-xs-12 pre-code">
+                     	<div data-ng-if="multi===true" >
+                     	
+                     	
+                     	</div>
+                     	<div data-ng-if="multi===false" data-ng-repeat="device in test.testDevices">
+	                     	<p>DesiredCapabilities capabilities = new DesiredCapabilities();</p>
+	                        <p>capabilities.setCapability("api_key","{{test.apiKey}}");</p>
+	                        <p>capabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION,"{{device.Version}}");</p>
+	                        <p>capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME,"{{device.Plateform}}");</p>
+	                        <p>capabilities.setCapability(MobileCapabilityType.UDID,"{{device.DeviceUDID}}");</p>
+	                        <p>capabilities.setCapability(MobileCapabilityType.DEVICE_NAME,"{{device.Manufacturer}}-{{device.Model}}");</p>
+	                        <p>capabilities.setCapability(MobileCapabilityType.APP_ACTIVITY,"{{test.app.activityName}}");</p>
+	                        <p>capabilities.setCapability(MobileCapabilityType.APP_PACKAGE,"{{test.app.appPackageName}}");</p>
+	                        <p data-ng-if="!location.hostname.includes('predev')">driver = new AndroidDriver(new URL("http://appium.testpace.com:{{device.tpAppiumPort}}/wd/hub"),capabilities);</p>
+	                        <p data-ng-if="location.hostname.includes('predev')">driver = new AndroidDriver(new URL("http://predev.appium.testpace.com:{{device.tpAppiumPort}}/wd/hub"),capabilities);</p>
+                     	</div>
+	                   
+		            </div>
+		            <div data-ng-if="test.app.appType==='webapp'"  class="col-sm-12 col-xs-12 pre-code">
+		            	<div data-ng-if="multi===true" >
+                     	
+                     	
+                     	</div>
+                     	<div data-ng-if="multi===false" data-ng-repeat="device in test.testDevices">
+                     		<p>DesiredCapabilities capabilities = new DesiredCapabilities();</p>
+	                        <p>capabilities.setCapability("api_key","{{test.apiKey}}");</p>
+	                        <p>capabilities.setCapability(MobileCapabilityType.BrowserName,"{{device.Version}}");</p>
+	                        <p>capabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION,"{{device.Version}}");</p>
+	                        <p>capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME,"{{device.Plateform}}");</p>
+	                        <p>capabilities.setCapability(MobileCapabilityType.UDID,"{{device.DeviceUDID}}");</p>
+	                        <p>capabilities.setCapability(MobileCapabilityType.DEVICE_NAME,"{{device.Manufacturer}}-{{device.Model}}");</p>
+	                        <p data-ng-if="!location.hostname.includes('predev')">driver = new AndroidDriver(new URL("http://appium.testpace.com:4723/wd/hub"),capabilities);</p>
+	                        <p data-ng-if="location.hostname.includes('predev')">driver = new AndroidDriver(new URL("http://predev.appium.testpace.com:4723/wd/hub"),capabilities);</p>
+	                        <p>driver.get("{{test.app.webUrl}}")</p>
+                     	
+                     	</div>
+	                    
+		            </div>
+		             <div class="col-sm-12 col-xs-12">
+		             	 <div class="pull-right bottom-10"><a data-ui-sref="home.app.execution">
+		             	<button type="button" class="btn btn-sm btn-warning">
+		               <i class="fa fa-play-circle-o"></i> Manage</button></a>
+		            </div>
+		             </div>
+		            
+		            
+                  </div>
+                 
+                 
+               </div>
+            </div>
+        

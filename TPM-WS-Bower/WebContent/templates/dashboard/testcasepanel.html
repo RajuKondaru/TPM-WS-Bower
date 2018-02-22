@@ -1,0 +1,80 @@
+	<div class="panel-group">
+		<div class="panel panel-default ng-scope" >
+			<div class="panel-heading col-md-12 col-xs-12">
+				<div class="col-md-6 pull-left">
+					<div class="text-capitalize"><span># {{test.name}}</span></div>  
+				</div>
+				<!-- <div ng-if="clock"   class="col-md-6 col-xs-12 pull-right">
+					<div class="btn-maroon btn btn-stop-ex col-xs-12" style="border-radius: 4px !important;">{{ clock | date:'mm:ss'}} </div>
+				</div> -->
+			</div>
+			<div class="panel-body table-responsive min-manel-h">
+				<!-- <div class="row bottom-20">
+					<div class="col-md-12 col-xs-12">
+						<div>
+							<div class="col-md-2 pull-left padding-rt-30"><img ng-src="{{test.app.icon}}" onerror="this.src=this.alt;"  alt="{{test.app.defaultIcon}}"></div>
+							<div class="col-md-4 pull-left">
+								<div>App Name : <label class="ng-binding text-capitalize">{{test.app.appName}}</label></div>
+								<div>Version: <label class="ng-binding">{{test.app.version}}</label></div>
+							</div>
+							<div class="col-md-6 pull-left">
+								<div>Device Name : <label class="ng-binding text-capitalize">{{device.Manufacturer}} {{device.Model}}</label></div>
+								<div>OS Version: <label class="ng-binding">{{device.Plateform}} {{device.Version}}  </label></div>
+							</div>
+						</div>
+					</div>
+				</div> -->
+				<div class="row" ng-hide="test.senario=='automation'">
+					<div class="table-responsive">
+								<table class="table tableSection hidden-scrollbar table-felx">
+									<thead class="thead-default">
+										<tr class='col-xs-12'>
+											<th class="flex20">Step No</th>
+											<th class="flex30">Test Step</th>
+											<th class="flex30">Expected Result</th>
+											<th class="flex20">Result</th>
+										</tr>
+									</thead>
+									<tbody class='inner'>
+										<tr ng-repeat="teststep in test.testCase">
+											<td class="flex20">{{teststep.stepno}}</td>
+											<td class="flex30">{{teststep.teststep}}</td>
+											<td class="flex30">{{teststep.expectResult}}</td>
+											<td class="flex20">
+												<select ng-init='this.Options = [{status: "pending","label": "Select" }, {status: "pass",  "label": "Pass" }, {status: "fail",  "label": "Fail" } ]; teststep.result = Options[0].status;'  class="form-control" ng-model='teststep.result' ng-options="option.status as option.label for option in Options">
+													
+												</select>
+											</td>
+										</tr>
+										
+									</tbody>
+								</table>
+							</div>
+				
+				</div>
+				<div class="row" ng-hide="test.senario=='automation'">
+					<div class="col-md-12">
+						<!-- <a href="#detailedreports/{{app.id}}"> -->
+							<button id='fn-btn'  type="button" ng-click="test.stop()" class=" pull-right btn btn-xm btn-blue">
+							<i class="fa ">Finish</i> 
+							</button>
+						<!-- </a> -->
+					</div>
+						<script type="text/ng-template" id="testCompleteModel.html">
+											        <div class="modal-header">
+											            <h3 class="modal-title"> #{{test.name}} Executed Successfully!</h3>
+											        </div>
+											       
+											        <div class="modal-footer">
+											            <button class="btn btn-primary" ng-click="ok()">Ok</button>
+											            
+											        </div>
+									</script>
+				</div>
+				
+				
+			</div>
+		</div>
+	</div>
+		
+		

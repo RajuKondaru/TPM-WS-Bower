@@ -1,0 +1,104 @@
+	<div class="panel-group">
+			<div class="panel panel-default ng-scope">
+				<div class="panel-heading col-md-12 col-xs-12">
+					<div class="col-md-12 pull-left">
+						<div class="text-capitalize" ># {{test.device.Manufacturer}} {{test.device.Model}} <div ng-show="!state" ng-click="test.reConnect()" class="btn btn-big btn-danger "><i class="fa fa-refresh fa-15"></i></div></div>  
+					</div>
+					
+				</div>
+				<div class="frame panel-body min-manel-h"> 
+					
+					<div class="col-xs-12 view-pad min-manel-h">
+						<div ng-show="!state" class="col-xs-12 loader-wrapper status-pad centered" id="loader-3" >
+							<span class ="letter14">Opps! <p>Device Connection Last. <br>Please Click On Refresh Button To Get Connection<p></span>
+						</div>
+						<div ng-if="!connectStatus " class="col-xs-12 loader-wrapper status-pad" id="loader-3" >
+				        	<div id="loader"></div>
+					        <div id="loader"></div>
+					        <div id="loader"></div>
+					        <div id="loader"></div>
+					        <div id="loader"></div>
+					        <div style="text-align: center; margin-top: 20px"><div > <h4 class="alert-heading " style="color: white;">{{loaderMessage}} <br></h4></div></div> 
+					      
+			   			</div>
+			   			<div ng-show="disconnectStatus=='Success' && disconnectStatus !='failed' " class="col-xs-12 loader-wrapper status-pad" id="loader-3" >
+					   		
+				        	<div class="cuptake">
+								<div id = "cupcake" class = "dbox">
+									<span class = "letter"> Happy Testing!</span>
+								    
+									
+								</div>
+								<div id = "cupcake" class = "dbox">
+									<div class = "cupcakeCircle dbox">
+								        <div class = "cupcakeInner dbox">
+								            <div class = "cupcakeCore dbox"></div>
+								        </div>
+							        </div>
+								</div>
+							</div>
+					   </div>
+					   <div ng-show="disconnectStatus!='Success' && disconnectStatus =='failed'" class="col-xs-12 loader-wrapper status-pad" id="loader-3" >
+					   		
+				        	<div class = "cuptake">
+								<div id = "cupcake" class = "dbox">
+									<span class = "letter"> D</span>
+								    <span class = "letter dbox">i</span>
+								    <span class = "letter dbox">s</span>
+								    <span class = "letter dbox">c</span>
+							       	<div class = "cupcakeCircle dbox">
+								        <div class = "cupcakeInner dbox">
+								            <div class = "cupcakeCore dbox"></div>
+								        </div>
+							        </div>
+								    <span class = "letter dbox">n</span>
+								  	<span class = "letter dbox">n</span>
+								    <span class = "letter dbox">c</span>
+								  	<span class = "letter dbox">t</span>
+								  	<span class = "letter dbox">i</span>
+								  	<span class = "letter dbox">n</span>
+								  	<span class = "letter dbox">g</span>
+								  	<span class = "letter dbox">.</span>
+									<span class = "letter dbox">.</span>
+									<span class = "letter dbox">!</span>
+								</div>
+								<div id = "cupcake" class = "dbox">
+									<span class = "letter10"> Device Cleaning Up Automatically</span>
+									
+								</div>
+							</div>
+					   </div>
+						<div  style="margin: 0px;">
+							<div id="noVNC_screen" style="padding-top: 5px !important; background-color: #000000 !important; border-bottom-right-radius: 0px; min-height: 450px;">
+						    	<div id="noVNC_status_bar" class="noVNC_status_normal" style="display:none; margin-top: 0px; ">
+					                <table border="0" >
+					                	<tbody>
+					                		<tr>
+						                    <td><div id="noVNC_status">Connected (unencrypted) to: XT1033</div></td>
+						                    <td width="1%"><div id="noVNC_buttons">
+					                        <input type="button" value="Send CtrlAltDel" id="sendCtrlAltDelButton" style="display: inline;"></div>
+					                            </td>
+					               			 </tr>
+					               		</tbody>
+					               	</table>
+					               	
+					            </div>
+					            <canvas id="noVNC_canvas" class="canvas_centre" style="cursor: url(data:image/x-icon;base64,AAACAAEACAcAAAMAAwAWAQAAFgAAACgAAAAIAAAADgAAAAEAIAAAAAAADgAAAAAAAAAAAAAAAAAAAAAAAAD///////////////////8A////AP////////////////////8AAAD//////////wD///8A/////wAAAP//////////AP////8AAAD///////////8AAAD//////////wD///8A////AP////8AAAD/AAAA//////////8A////AP///wD/////AAAA////////////AAAA//////////8A/////wAAAP//////////AP///wD/////AAAA//////////////////////////8A////AP///////////////wAAAAAAAAAAAAAAAAAA&quot;) 3 3, default;">
+					                Canvas not supported.
+					            </canvas>
+					           
+						     </div>
+						      <div ng-if="clock"   class="col-md-12 col-xs-12">
+									<div class="btn-maroon btn btn-stop-ex col-xs-12" style="border-radius: 4px !important;">{{ clock | date:'mm:ss'}} </div>
+								</div>
+						     
+
+						</div>
+					</div>
+			
+			
+				</div>
+			</div>
+		</div>
+	
+		

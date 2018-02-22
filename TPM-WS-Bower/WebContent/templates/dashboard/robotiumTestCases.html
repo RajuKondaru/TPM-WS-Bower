@@ -1,0 +1,66 @@
+
+<div class="panel-group">
+   <div class="panel panel-default">
+      <div class="panel-heading">Test Cases</div>
+      <div class="panel-body min-manel-h dbox table-responsive">
+       <!--   <div class="row  robo-min-tc searchable-container"> -->
+	         <div class="row" >
+	         	<div class="col-md-12 col-sm-12 col-xs-12" style="min-height: 80%;">
+					<div class='col-md-4 info-block block-info clearfix' style='float:left; ' data-ng-repeat="auttc in autrs"  >
+			         <div class='square-box pull-left' >
+			            <span class='glyphicon glyphicon-tags glyphicon-lg'></span>
+			          </div>
+			          <div data-toggle='buttons' class='btn-group bizmoduleselect'  >
+			            <div class='btn btn-default label-for-check' for="check" data-ng-class="{'selective':auttc.select}"  data-ng-click="selectRow(auttc)">
+			                 <div class='bizcontent' style='overflow: hidden;'>
+	                             <input class="check-with-label" type='checkbox' name='var_id[]' id="check"  autocomplete='off' data-ng-model="auttc.select" value="{{auttc.tcname}}"  data-ng-click="$event.stopPropagation()" >
+	                             <span class='glyphicon glyphicon-lg' data-ng-class="{'glyphicon-ok select-op':auttc.select}" ></span>
+	                             <h5>{{auttc.tcname}} </h5>
+	                         </div>
+	                     </div>
+	                 </div>
+	              </div>
+	              
+	              
+				</div>
+				<div class="col-md-12 col-sm-12 col-xs-12">
+					<div class="row">
+		             	<div class="col-md-12 col-xs-12 error-height">
+		             		<div class="col-md-6 pull-right">
+		
+								<span style="color:red" class="alert alert-danger pull-left" data-ng-show="exist">TestSuite Name already exist, Please Try with another Name</span>
+								<span style="color:red" class="alert alert-danger pull-left" data-ng-show="showError">Select at least on Testcase</span>
+						</div> 
+		          	</div>
+		          </div>
+		          <div class="row">
+		          	 <div class="col-md-12 col-xs-12">
+		             	<div class="col-md-6 ">
+		             		<button id="selectButton" type="button" class="btn btn-sm btn-blue" data-ng-click="selectAllRows()"  data-ng-disabled="isAll" >Select All</button>
+							<button id="resetButton" type="button" class="btn btn-sm btn-warning" data-ng-click="unselectAllRows()" data-ng-disabled="disableButton"  >Reset</button>
+		             	</div>
+		             	<form name="form1">
+		                  <div class="col-md-4 ">
+		                    	<input type="text" class="form-control" data-ng-model="testsuite" placeholder="Enter Test Suite Name" required ng-click="isSelectedRow()"> 
+		                  </div>
+		                  <div class="col-md-2 add-btn-mobile"><button class="btn btn-sm btn-blue pd-rt-lt-30" data-ng-disabled="disableButton || !testsuite"   data-ng-click="save(testsuite, test.app)">Save</button></div>
+		             	</form>
+		             </div>
+		          </div>
+				</div>
+	         </div>
+		 <!-- </div> -->
+     </div>
+          
+          <script type="text/ng-template" id="TestNameComformModel.html">
+											        <div class="modal-header">
+											            <h3 class="modal-title">{{test.type}} Test #{{test.name}} created Successfully!</h3>
+											        </div>
+											        <div class="modal-footer">
+											            <button class="btn btn-primary" ng-click="ok()">Ok</button>
+											          
+											        </div>
+										    	</script>
+   </div>
+</div>
+

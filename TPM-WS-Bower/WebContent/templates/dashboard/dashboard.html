@@ -1,0 +1,255 @@
+
+<div id="page-content-wrapper">
+	<!-- breadcrumb -->
+	<ul class="breadcrumb">
+		<li class="breadcrumb-item"><a class="dec-none" ui-sref="home.dashboard">Dashboard</a></li>
+		<li class="breadcrumb-item active">My Apps</li>
+	</ul>
+	<!-- /breadcrumb-->
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-12 col-xs-12">
+				<div class="panel-group">
+					<div class="panel panel-default">
+						<div class="panel-heading">My Apps
+							<div class="pull-right">
+								<a ui-sref="home.newapp">
+								<button type="button" class="btn btn-sm btn-blue">
+								<i class="fa fa-plus-circle pad-rt-inh"></i><span>New App</span>
+								</button>
+								</a>
+							</div>
+						</div>
+						<div class="panel-body table-responsive">
+							<div class="row">
+								<div class="col-md-12 col-xs-12 bottom-10">
+
+									<input type="text" class="form-control" ng-model = "appName" placeholder="Search Configuration">
+								</div>
+							</div>
+							<ul class="nav nav-tabs tab-wid">
+								<li id='active' class="active" ><a >Active</a></li>
+								<li id='archive'><a >Archive</a></li>
+							</ul>
+							<div class="tab-content">
+								<div  id="activetab" class=" tab-pane fade in active">
+									<div class="row">
+										<div  class="col-md-3 col-sm-6 col-xs-12" data-ng-repeat="app in activeappinfo | orderBy: 'id':true | filter: appName  " >
+											<div class="col-md-12 col-sm-6 col-xs-12  card-box tilebox-three" ng-class="app.fileName.includes('.apk') ? 'android-icon' :(app.fileName.includes('.ipa') ?'apple-icon' :'default-icon') ">
+												<div class="row app-action">
+													<a ui-sref="home.delete({id:app.id})" style="text-decoration: none; "   >
+													<span class="pull-left icon-pointer"><i class="fa fa-trash-o"></i></span>
+													</a>
+													<a ui-sref="home.trash({id:app.id})"style="text-decoration: none; "   >
+													<span class="pull-right icon-pointer"><i class="fa fa-exchange small-icon"></i></span>
+													</a>
+												</div>
+												<a ui-sref="home.app({id:app.id})">
+													<h5 class="text-dark-blue app-title">{{app.appName}}</h5>
+													<div  class="col-md-12 col-sm-6 col-xs-12 pad-none">
+														<div  class="col-md-4 col-sm-6 col-xs-12 pad-rt">
+															<span>
+															<img class="large-icon"  onerror="this.src=this.alt;"  alt="{{app.defaultIcon}}" ng-src="{{app.icon}}" >
+															</span>
+														</div>
+														<div class="col-md-8 col-sm-6 col-xs-12 pad-r">
+
+															<p ng-if="app.appType=='native'" class="small">Build: <span>{{app.buildId}}</span></p>
+															<p ng-if="app.appType=='webapp'" class="small">URL: <span>{{app.webUrl}}</span></p>
+															<p class="small">Version: <span>{{app.version}}</span></p>
+															<p class="small">{{app.uploadedDate}}</p>
+														</div>
+
+													</div>
+
+												</a>
+											</div>
+										</div>
+										<div ng-if="!activeappinfo.length && !errorActive" class="col-xs-12 loader-wrapper" id="loader-3">
+								        <!--	<div id="loader"></div>
+									        <div id="loader"></div>
+									        <div id="loader"></div>
+									        <div id="loader"></div>
+									        <div id="loader"></div>-->
+													<cube-grid-spinner></cube-grid-spinner>
+									        <div style="text-align: center; margin-top: 20px"><div class="alert" role="alert"> <h4 class="alert-heading">Loading Active Apps. Please Wait..!</h4></div></div>
+								   		</div>
+										<div id="error" ng-if="!activeappinfo.length && errorActive" class=" widget-tab "   >
+											<span style=" font-size: 16px;">You don't have any active apps. Please look at <a href=".archivetab" class="navilink">archive</a> or <a  class="navilink" href="#!newapp">create</a> a new app.</span>
+										</div>
+									</div>
+								</div>
+								<div id="archivetab" class=" tab-pane fade">
+									<div class="row">
+										<div  class="col-md-3 col-sm-6 col-xs-12" data-ng-repeat="app in archiveappinfo | orderBy: 'id':true | filter: appName " >
+											<div class="col-md-12 col-sm-6 col-xs-12  card-box tilebox-three" ng-class="app.fileName.includes('.apk') ? 'android-icon' :(app.fileName.includes('.ipa') ?'apple-icon' :'default-icon') ">
+												<div class="row app-action">
+													<a ui-sref="home.delete({id:app.id})"  style="text-decoration: none;"   >
+													<span class="pull-left icon-pointer"><i class="fa fa-trash-o"></i></span>
+													</a>
+													<a ui-sref="home.active({id:app.id})"  style="text-decoration: none;" >
+													<span class="pull-right icon-pointer"><i class="fa fa-exchange small-icon"></i></span>
+													</a>
+												</div>
+												<a href="#">
+													<h5 class="text-dark-blue app-title">{{app.appName}}</h5>
+													<div  class="col-md-12 col-sm-6 col-xs-12">
+														<div  class="col-md-4 col-sm-6 col-xs-12 pad-none">
+															<span class="medium-icon pull-xs-left">
+															<img class="medium-icon" onerror="this.src=this.alt;"  alt="{{app.defaultIcon}}" data-ng-src="{{app.icon}}">
+															</span>
+														</div>
+														<div class="col-md-8 col-sm-6 col-xs-12 pad-none">
+															<p ng-if="app.appType=='native'" class="small">Build: <span>{{app.buildId}}</span></p>
+															<p ng-if="app.appType=='webapp'" class="small">URL: <span>{{app.webUrl}}</span></p>
+															<p class="small">Version: <span>{{app.version}}</span></p>
+															<p class="small">{{app.uploadedDate}}</p>
+														</div>
+													</div>
+
+												</a>
+											</div>
+										</div>
+										<div ng-if="!archiveappinfo.length && !errorArchive" class="col-xs-12 loader-wrapper" id="loader-3">
+								        	<div id="loader"></div>
+									        <div id="loader"></div>
+									        <div id="loader"></div>
+									        <div id="loader"></div>
+									        <div id="loader"></div>
+									        <div style="text-align: center; margin-top: 20px"><div class="alert" role="alert"> <h4 class="alert-heading">Loading Archive  Apps. Please Wait..!</h4></div></div>
+								   		</div>
+										<div id="error"  ng-if="!archiveappinfo.length && errorArchive"  class=" widget-tab "   >
+											<span style=" font-size: 16px;">You don't have any archive apps. Please look at <a  class="navilink" href=".activetab">active</a> or <a  class="navilink" href="#!newapp">create</a> a new app.</span>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12 col-xs-12">
+				<div class="panel-group">
+					<div class="panel panel-default">
+						<div class="panel-heading">Recent Activity</div>
+						<div class="panel-body table-responsive">
+							<div class="table-responsive" ng-if="totalResults.length">
+
+								<table class="table table-striped table-hover text-capitalize">
+									<thead>
+										<tr>
+											<th>App</th>
+											<th>Version</th>
+											<th>Device</th>
+											<th>Name</th>
+											<th>Type</th>
+											<th>Result</th>
+											<th class='status'>Status</th>
+											<th class='issue'>Issue</th>
+										</tr>
+									</thead>
+									<tbody ng-if="totalResults.length"  >
+										<tr data-ng-repeat="result in totalResults | orderBy :'excDate' : true track by $index" ng-click="test.getReport(result)" >
+
+											<td> <img ng-src="{{result.icon}}" class="med-icon"> {{result.AppName}}</td>
+
+											<td>{{result.version}}</td>
+											<td>{{result.deviceName}}</td>
+											<td>{{result.testName}}</td>
+											<td ng-class="result.app.fileName.includes('.apk') ? 'android-icon' :(result.app.fileName.includes('.ipa') ?'apple-icon' :'default-icon') ">{{result.testSenario}} / {{result.testType}}</td>
+											<td>
+												<div class="label label-table label-success" ng-class="result.testResult === 'Passed' ? 'label-success': (result.testResult === 'Failed' ? 'label-warning': 'label-danger')">{{result.testResult}}</div>
+											</td>
+											<td>
+												{{result.testType}} Reports #{{result.testName}} has finished {{result.excTime}}
+											</td>
+											<td>
+												you haven't created any issues yet.
+											</td>
+										</tr>
+
+									</tbody>
+								</table>
+							</div>
+							<div >
+								<div ng-if="!reportError && !totalResults.length" class="col-xs-12 loader-wrapper" id="loader-3">
+						        	<div id="loader"></div>
+							        <div id="loader"></div>
+							        <div id="loader"></div>
+							        <div id="loader"></div>
+							        <div id="loader"></div>
+							        <div style="text-align: center; margin-top: 20px"><div class="alert" role="alert"> <h4 class="alert-heading">Loading Recent Activies. Please Wait..!</h4></div></div>
+						   		</div>
+						   		<div class="row">
+							   		<div ng-if="reportError && !totalResults.length" class="widget-tab " style="text-align: center; margin-top: 20px"  >
+										<span style=" font-size: 16px;">You don't have any activites as of now. </span>
+									</div>
+								</div>
+							</div>
+							<div class="pull-right">
+								<!-- pager -->
+						            <ul data-ng-if="vm.pager.pages.length" class="pagination">
+						                <li data-ng-class="{disabled:vm.pager.currentPage === 1}">
+						                    <a data-ng-click="vm.setPage(1)">First</a>
+						                </li>
+						                <li data-ng-class="{disabled:vm.pager.currentPage === 1}">
+						                    <a data-ng-click="vm.setPage(vm.pager.currentPage - 1)">Previous</a>
+						                </li>
+						                <li data-ng-repeat="page in vm.pager.pages" data-ng-class="{active:vm.pager.currentPage === page}">
+						                    <a data-ng-click="vm.setPage(page)">{{page}}</a>
+						                </li>
+						                <li data-ng-class="{disabled:vm.pager.currentPage === vm.pager.totalPages}">
+						                    <a data-ng-click="vm.setPage(vm.pager.currentPage + 1)">Next</a>
+						                </li>
+						                <li data-ng-class="{disabled:vm.pager.currentPage === vm.pager.totalPages}">
+						                    <a data-ng-click="vm.setPage(vm.pager.totalPages)">Last</a>
+						                </li>
+						            </ul>
+
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- /#page-content-wrapper -->
+</div>
+<script type="text/javascript">
+$('.tab-wid li').click(function(){
+    var ix = $(this).index();
+    if( ix === 0 ){
+    	$('#activetab').toggle( ix === 0 )
+    	$('#archive').removeClass('active');
+    	$('#active').addClass('active');
+    	$('#activetab').addClass('in active');
+    	$('#archivetab').removeClass('in active');
+    	$('#archivetab').css("display", "none"); 
+    	
+    } else if(ix === 1 ){
+    	$('#archivetab').toggle( ix === 1 )
+    	$('#active').removeClass('active');
+    	$('#archive').addClass('active');
+    	$('#archivetab').addClass('in active');
+    	$('#activetab').removeClass('in active');
+    	$('#activetab').css("display", "none"); 
+    	
+    }
+    
+});
+</script>
+<script type="text/ng-template" id="AppDeleteConfirmModel.html">
+											        <div class="modal-header">
+											            <h3 class="modal-title"> Do You Want Delete #{{app.appName}} App?</h3>
+											        </div>
+											        <div class="modal-body body-overflow">
+											           <div id="message" class="msg-16" style="padding: 10px;">If You Delete this app.<br> You lost test reports realated to this app!</div>
+											        </div>
+											        <div class="modal-footer">
+											            <button class="btn btn-primary" ng-click="deleteApp()">Delete</button>
+														<button class="btn btn-danger" ng-click="cancel()">Cancel</button>
+
+											        </div>
+									</script>

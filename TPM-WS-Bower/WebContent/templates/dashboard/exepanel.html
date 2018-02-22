@@ -1,0 +1,185 @@
+<div class="panel-group">
+   <div class="panel panel-default">
+      <div class="panel-heading col-md-12 col-xs-12">Execution</div>
+      <div class="panel-body min-manel-h dbox table-responsive">
+    	
+			<div class="col-md-12 col-xs-12" >
+				<div class="col-md-12 col-xs-12 pad-none" >
+					<div class="table-responsive" data-ng-if="test.devices.length">
+
+						<table style="table-layout:fixed;" class="table-striped table-hover text-capitalize" >
+							<thead>
+									<tr>
+										<th class="text-center col-sm-3">Device</th>
+										<th class="text-center col-sm-3">Name</th>	
+										<th class="text-center col-sm-3">Type</th>
+										<th class="text-center col-sm-2">No.of Tests</th>
+										<th class="text-center col-sm-4">Status</th>
+										
+									</tr>
+								</thead>
+							<tbody data-ng-if="test.devices.length"  >
+								<tr  data-ng-repeat="device in test.testDevices" >
+										<td class="text-center col-sm-3">
+											<div data-ng-click="switchView(device)">
+												<img class='img-device' data-ng-src="{{device.Icon}}" >
+												<br>{{device.Manufacturer}} - {{device.DeviceName}} {{device.Model}}
+											</div>
+										</td>
+										<td class="text-center col-sm-3">{{test.name}}</td>
+										<td class="text-center col-sm-3">{{test.type}}</td>
+										<td class="text-center col-sm-2">
+											{{test.testsuite.length}}/{{testcaseCompleted}}
+										</td>
+										<td class="text-center col-sm-4">
+											<div >{{device.status}}</div>
+											<button data-ng-if="isResult == true" class="btn btn-primary" data-ng-click="getResult(test, device)">Get Result</button>
+											
+										</td>
+										
+								</tr>
+								<tr></tr>
+
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		
+	  </div>
+	</div>
+</div>
+
+<div id="myNav" class="overlay">
+  	<a href="javascript:void(0)" style="z-index: 100000;" class="closebtn" data-ng-click="closeView()">&times;</a>
+	  <div id="deviceView" style="height: 100%; display: none;">
+	  	<div class="frame col-md-12 col-xs-12"> 
+	  		<div  style="margin: 0px;height: 100%;"  class="col-md-6 col-xs-12">
+	  			<div id="noVNC_screen"  style="padding: 10px !important; border-bottom-right-radius: 0px; height: 100%; width: 30%; margin:auto;">
+			    	<div id="noVNC_status_bar" class="noVNC_status_normal" style="display:none; margin-top: 0px; ">
+		                <table style="border: 0px;" >
+		                	<tbody>
+		                		<tr>
+			                    <td><div id="noVNC_status">Connected (unencrypted) to: XT1033</div></td>
+			                    <td width="1%"><div id="noVNC_buttons">
+		                        <input type="button" value="Send CtrlAltDel" id="sendCtrlAltDelButton" style="display: inline;"></div>
+		                            </td>
+		               			 </tr>
+		               		</tbody>
+		               	</table>
+		               	
+		            </div>
+		            <canvas id="noVNC_canvas"style="height: 100%;cursor: url(data:image/x-icon;base64,AAACAAEACAcAAAMAAwAWAQAAFgAAACgAAAAIAAAADgAAAAEAIAAAAAAADgAAAAAAAAAAAAAAAAAAAAAAAAD///////////////////8A////AP////////////////////8AAAD//////////wD///8A/////wAAAP//////////AP////8AAAD///////////8AAAD//////////wD///8A////AP////8AAAD/AAAA//////////8A////AP///wD/////AAAA////////////AAAA//////////8A/////wAAAP//////////AP///wD/////AAAA//////////////////////////8A////AP///////////////wAAAAAAAAAAAAAAAAAA&quot;) 3 3, default;">
+		                Canvas not supported.
+		            </canvas>
+			     </div>
+			     
+	  		</div>
+	  		<div id="status" style="height: 100%; position: relative;font-size: large; top:15%;" class="col-md-6 col-xs-12 ">
+			    <!-- <div>
+			    	<span><font class="status-font">{{status}}</font> </span>
+			    	<span><i class="fa fa-check-circle comp"></i></span>
+			    </div> -->
+			    <div data-ng-if="!isConnected " class="devpad-20">
+				    <span><font class="status-font">{{connectionStatus}}</font> </span>
+				    <span><img class="none-border" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="></span>
+				</div>
+			    <div data-ng-if="isConnected " class="devpad-20">
+			    	<span><font class="status-font">{{connectionStatus}}</font> </span>
+			    	<span><i class="fa fa-check-circle comp"></i></span>
+			    </div>
+			    <div data-ng-if="isConnected && !isApp " class="devpad-20">
+			    	<span><font class="status-font">{{appStatus}}</font> </span>
+			    	<span><img class="none-border" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="> </span>
+			    </div>
+			    <div data-ng-if="isConnected && isApp " class="devpad-20">
+			    	<span><font class="status-font">{{appStatus}}</font> </span>
+			    	<span><i class="fa fa-check-circle comp"></i></span>
+			    </div>
+			     <div data-ng-if="isApp && !isAppiumConnect" class="devpad-20">
+			    	<span><font class="status-font">{{appiumStatus}}</font> </span>
+			    	<span><img class="none-border" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="> </span>
+			    </div>
+			     <div data-ng-if="isApp && isAppiumConnect" class="devpad-20">
+			    	<span><font class="status-font">{{appiumstart}}</font> </span>
+			    	<span><i class="fa fa-check-circle comp"></i></span>
+			    </div>
+			    
+			     <div data-ng-if="isAppiumConnect && !isAppiumExeStart" class="devpad-20">
+			    	<span><font class="status-font">Appium is ready for execution. Plaese, run your script from your local mechine</font> </span>
+			    	<span><img class="none-border" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="> </span>
+			    </div>
+			     <div data-ng-if="isAppiumConnect && isAppiumExeStart" class="devpad-20">
+			    	<span><font class="status-font">{{appiumexestart}}</font> </span>
+			    	<span><i class="fa fa-check-circle comp"></i></span>
+			    </div>
+			     <div data-ng-if="isAppiumExeStart && !isAppiumServerClose" class="devpad-20">
+			    	<span><font class="status-font">Please wait, Your script is executing..</font> </span>
+			    	<span><img class="none-border" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="> </span>
+			    </div>
+			     <div data-ng-if="isAppiumExeStart && isAppiumServerClose" class="devpad-20">
+			    	<span><font class="status-font">{{appiumServerClose}}</font> </span>
+			    	<span><i class="fa fa-check-circle comp"></i></span>
+			    </div>
+			    
+			    <div data-ng-if="isAppiumServerClose && !isAppiumExeCom" class="devpad-20">
+			    	<span><font class="status-font">Please wait, cleaning process initiated..</font> </span>
+			    	<span><img class="none-border" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="> </span>
+			    </div>
+			     <div data-ng-if="isAppiumServerClose && isAppiumExeCom" class="devpad-20">
+			    	<span><font class="status-font">{{appiumExeComStatus}}</font> </span>
+			    	<span><i class="fa fa-check-circle comp"></i></span>
+			    </div>
+			    
+			    <div data-ng-if="isApp && !isAUTApp && isRoboExe" class="devpad-20">
+			    	<span><font class="status-font">{{autAppStatus}}</font> </span>
+			    	<span><img class="none-border" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="></span>
+			    </div>
+			    <div data-ng-if="isApp && isAUTApp " class="devpad-20">
+			    	<span><font class="status-font">{{autAppStatus}}</font> </span>
+			    	<span><i class="fa fa-check-circle comp"></i></span>
+			    </div>
+			     <div data-ng-if="isAUTApp && !isStarted" class="devpad-20">
+			    	<span><font class="status-font">{{exeStatus}}</font> </span>
+			    	<span><img class="none-border" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="></span>
+			    </div>
+			    <div data-ng-if="isAUTApp && isStarted" class="devpad-20">
+			    	<span><font class="status-font">{{exeStatus}}</font> </span>
+			    	<span><i class="fa fa-check-circle comp"></i></span>
+			    </div>
+			    <div data-ng-if="isStarted && !isTCFinish" class="devpad-20">
+			    	<span><font class="status-font">{{testcaseStatus}}</font> </span>
+			    	<span><img class="none-border" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="></span>
+			    </div>
+			    <div data-ng-if="isStarted && isTCFinish" class="devpad-20">
+			    	<span><font class="status-font">{{testcaseStatus}}</font> </span>
+			    	<span><i class="fa fa-check-circle comp"></i></span>
+			    </div>
+			    <div data-ng-if="isTCFinish && !isFinish" class="devpad-20">
+			    	<span><font class="status-font">{{finalStatus}}</font> </span>
+			    	<span><img class="none-border" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="></span>
+			    </div>
+			    <div data-ng-if="isTCFinish && isFinish" class="devpad-20">
+			    	<span><font class="status-font">{{finalStatus}}</font> </span>
+			    	<span><i class="fa fa-check-circle comp"></i></span>
+			    </div>
+			    <div data-ng-if="error" class="devpad-20">
+			    	<span><font class="status-font">{{error}}</font> </span>
+			    	<span><i class="fa fa-times-circle comp"></i></span>
+			    </div>
+			</div>
+	  	</div>
+	    	
+	  </div>
+	  <div class="overlay-content">
+	     <div id="message" style="margin: 10px; font-size: medium;"></div>
+	  </div>
+ </div>
+ <script type="text/ng-template" id="testCompleteModel.html">
+	<div class="modal-header">
+		<h3 class="modal-title"> #{{test.name}} Executed Successfully!</h3>
+	</div>
+	<div class="modal-footer">
+		<button class="btn btn-primary" data-ng-click="ok()">Ok</button>
+	</div>
+</script>										        

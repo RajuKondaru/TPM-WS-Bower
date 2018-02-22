@@ -1,0 +1,103 @@
+
+<div class="panel-group">
+	<div class="panel panel-default " >
+		<div class="panel-heading">Write TestCase</div>
+		<div class="panel-body table-responsive min-manel-h">
+			<form name="create" ng-submit="addNew()">
+				<div class="row bottom-20" >
+					<div class="col-md-12 col-xs-12">
+						<div class="pwd-changeform-txt top-lable">
+							<label class="control-label col-md-2" for="exampleInputEmail" style="text-align:left;">
+							Test Step:
+							</label>
+							<div class="col-md-8">
+								<input type="text" class="form-control col-md-7" id="test step" ng-model="testCaseDetail.teststep" placeholder="Enter Teststep"  required >
+							</div>
+							<div class="col-md-2"></div>
+						</div>
+						<div class="pwd-changeform-txt top-lable">
+							<label class="control-label col-md-2" for="exampleInputEmail" style="text-align:left;">
+							Expect:
+							</label>
+							<div class="col-md-8">
+								<input type="text" class="form-control col-md-7" id="expect" ng-model="testCaseDetail.expectResult" placeholder="Enter Expected Result"  required>
+							</div>
+							<div class="col-md-2 add-btn-mobile"> <input type="submit"  ng-disabled="create.$pristine|| create.$invalid" class="btn btn-primary addnew pull-right" value="Add Step"></div>
+						</div>
+					</div>        
+				</div>
+				<div class="row table-flex">
+					<div class="col-md-12 col-xs-12">
+						<div>          
+							<table class="table table-hover tableSection">
+								<thead class="thead-inverse thead-default">
+									<tr > <!-- ng-click="selectedAll=!selectedAll" -->
+										<!-- <th><input type="checkbox" ng-model="selectedAll" ng-click="$event.stopPropagation()"/></th> -->
+										<th>Test Step No</th>
+										<th>Test Step</th>
+										<th>Expected Result</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr ng-repeat="testCaseDetail in testCaseDetails" ng-class="{'selected':testCaseDetail.selected}"  ng-click="testCaseDetail.selected=!testCaseDetail.selected" >
+										<td style="display:none;"><input type="checkbox" ng-model="testCaseDetail.selected" ng-click="$event.stopPropagation()"/></td>
+                                    	<td>{{testCaseDetail.stepno}}</td>
+										<td>{{testCaseDetail.teststep}}</td>
+										<td>{{testCaseDetail.expectResult}}</td>
+									</tr>
+									
+								</tbody>
+							</table>
+							<div class="form-group">
+                                <input ng-hide="!testCaseDetails.length" type="button" class="btn btn-danger pull-right" ng-click="remove()" value="Remove">
+                            </div>
+						</div>
+					</div>
+				</div>
+			</form>
+			<div class="row" >
+				<div class="col-md-12 col-xs-12 error-flex">
+					<div class="col-md-4 col-xs-offset-3">
+						<div >
+							<span style="color:red" class="alert" ng-show="form1.textcasename.$error.minlength">TestCase Name is too short</span>
+							<span style="color:red" class="alert" ng-show="form1.textcasename.$error.pattern">TestCase Name is not valid</span>
+							<span style="color:red" class="alert" ng-show="exist">TestCase Name already exist, Please Try with another Name</span>
+						 </div> 
+					 </div>
+				</div>
+				<div class="col-md-12 col-xs-12">
+						<form name="form1">
+							<div class="col-md-4 col-xs-offset-3">
+								<input type="text" name='textcasename' pattern="^[a-zA-Z0-9-_]+$" ng-minlength="5" class="form-control" placeholder="Enter TestCase Name" ng-model='testCaseDetails.name' required>
+							</div>
+							<div class="col-md-2 add-btn-mobile">
+								<button class="btn btn-sm btn-blue pd-rt-lt-30 " ng-disabled="form1.$pristine &&  form1.$invalid && testCaseDetails.length == 0"  ng-click="save(testCaseDetails, test.app)">Save</button>
+								<script type="text/ng-template" id="myModalContent.html">
+											        <div class="modal-header">
+											            <h3 class="modal-title">Testcase #{{test.name}} created Successfully!</h3>
+											        </div>
+											        <div class="modal-body">
+											            Do You Want Create New Testcase?
+											        </div>
+											        <div class="modal-footer">
+											            <button class="btn btn-primary" ng-click="ok()">Yes</button>
+											            <button class="btn btn-warning" ng-click="cancel()">No</button>
+											        </div>
+										    	</script>
+						    	
+
+							</div>
+					</form>
+					
+					
+				</div>
+			</div>
+			<div class="row note-flex" >
+				<div class="col-md-12 alert alert-info centered">
+				    <strong>Note : </strong> Testcase Name Should be minimum 5 characters & Use underscore to Word spacing. <br>For Exemple: test_sample_01
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+		

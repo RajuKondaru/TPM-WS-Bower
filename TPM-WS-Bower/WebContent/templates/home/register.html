@@ -1,0 +1,118 @@
+<div class="animated bounceIn">
+<div class="panel panel-login">
+<div class="panel-body">
+
+<!-- define angular controller -->
+<h2 class="form-label">Create An Account</h2>
+<div class="form-container"  data-ng-controller="registerController">
+	<form name="registerForm" role="form" data-ng-submit="formSubmit()">
+		<div class="form-group">
+			<div id='errors' ></div>
+		</div>
+		<div class="form-group"><!-- Display Name -->
+			<div class="row">
+				<!--
+				The Bootstrap grid system has four classes: xs (phones), sm (tablets), md (desktops), and lg (larger desktops).
+				The classes can be combined to create more dynamic and flexible layouts. -->
+				<div class="col-md-12 col-xs-12">
+				<div class="row inner">
+					<div class="col-md-6 col-sm-6 col-xs-6  left">
+					<div class="error form-hint"
+					data-ng-show="registerForm.firstname.$dirty && registerForm.firstname.$error.required"
+					data-ng-cloak>{{"This field is required."}}
+					</div>
+					<input type="text" class="form-control" name="firstname" placeholder="First name"
+					data-ng-class="(registerForm.firstname.$dirty && registerForm.firstname.$invalid) ? 'error' : ''"
+					data-ng-required="true" data-ng-model="firstName">
+					</div>
+
+					<div class="col-md-6 col-sm-6 col-xs-6  right">
+					<div class="error form-hint"
+					data-ng-show="registerForm.lastname.$dirty && registerForm.lastname.$error.required"
+					data-ng-cloak>{{"This field is required."}}
+					</div>
+					<input type="text" class="form-control" name="lastname" placeholder="Last name"
+					data-ng-class="(registerForm.lastname.$dirty && registerForm.lastname.$invalid) ? 'error' : ''"
+					data-ng-required="true" data-ng-model="lastName">
+					</div>
+				</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="form-group">
+			<div class="error form-hint"
+			data-ng-show="registerForm.username.$dirty && registerForm.username.$error.required"
+			data-ng-cloak>{{"This field is required."}}
+			</div>
+
+			<input type="text" class="form-control" id="userid" name="username" placeholder="User name"
+			data-ng-class="(registerForm.username.$dirty && registerForm.username.$invalid) ? 'error' : ''"
+			data-ng-required="true" data-ng-model="userName">
+		</div>
+
+		<div class="form-group">
+			<div class="error form-hint"
+			data-ng-show="registerForm.email.$dirty && registerForm.email.$error.required"
+			data-ng-cloak>{{"You can't leave this empty."}}
+			</div>
+			<div class="error form-hint"
+			data-ng-show="registerForm.email.$dirty && registerForm.email.$error.email"
+			data-ng-cloak>{{"The email address you provided isn't valid"}}</div>
+
+			<input type="email" class="form-control" id="emailid" name="email" placeholder="Email address"
+			data-ng-class="(registerForm.email.$dirty && registerForm.email.$invalid) ? 'error' : ''"
+			data-ng-required="true" data-ng-model="email">
+		</div>
+
+		<div class="form-group">
+			<!-- <label for="password">Password</label> -->
+
+			<div class="form-hint">
+			To conform with our Strong Password policy,
+			Use at least one letter, one numeral, one special character, and seven characters.
+			</div>
+
+			<input type="password" class="form-control" data-ok-password-directive
+			data-ng-class="(registerForm.password.$dirty && registerForm.password.$invalid) ? 'error' : ''"
+			id="password" name="password" placeholder="Password" data-ng-required="true" data-ng-model="passwordModel">
+
+			<div class="label password-count" data-ng-class="password.length > passwordLength ? 'label-success' : 'label-danger'"
+			data-ng-cloak>{{ passwordModel | passwordCount:passwordLength }}</div>
+
+			<div class="strength-meter">
+				<div class="strength-meter-fill" data-strength="{{myModulePasswordMeter}}"></div>
+			</div>
+		</div>
+
+		<div class="form-group">
+
+			<div class="error form-hint"
+			data-ng-show="registerForm.confirm.$dirty && registerForm.confirm.$error.required && !registerForm.confirm.$invalid"
+			data-ng-cloak>{{"You can't leave this empty."}}
+			</div>
+			<div class="error form-hint"
+			data-ng-show="registerForm.confirm.$dirty && registerForm.confirm.$invalid"
+			data-ng-cloak>{{"These passwords don't match. Try again?"}}</div>
+
+			<!-- Enter to Confirm password | Enter for Password confirmation -->
+			<input type="password" class="form-control" id="confirmpassword" name="confirm"
+			placeholder="Password confirmation"
+			data-ng-required="true" data-ng-model="conformPassword"
+			data-ng-class="(registerForm.confirm.$dirty && registerForm.confirm.$invalid) ? 'error' : ''"
+			data-compare-to="registerForm.password">
+		</div>
+		<!-- Create an account | Sign up for Application -->
+		<!-- By signing up, you agree with our Terms of Service. |
+		By clicking on "Create an account" below, you are agreeing to the Terms of Service and the Privacy Policy.
+		I agree to Appliation's Terms of Service and Privacy Policy. -->
+		<button id="siginButton" type="submit" class="btn" data-ng-disabled="registerForm.$invalid"> Sign Up</button>
+
+		<br><br><div class="form-group"><!-- class="btn" -->
+			<div>Already have an account? <a ui-sref="main.login" class="btn-link">Login here</a></div>
+		</div>
+	</form>
+</div>
+
+</div>
+</div></div>

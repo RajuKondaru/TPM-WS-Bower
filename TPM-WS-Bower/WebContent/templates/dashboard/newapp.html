@@ -1,0 +1,155 @@
+<!-- Page Content -->
+<div id="page-content-wrapper">
+	<!-- breadcrumb -->
+	<ul class="breadcrumb">
+		<li class="breadcrumb-item"><a class="dec-none" href="#!dashboard">Dashboard</a></li>
+	  	<li class="breadcrumb-item active">New App</li>
+	</ul>
+	<!-- /breadcrumb-->
+	<div class="container-fluid ">
+		<div class="row">
+			<div class="col-md-12 col-xs-12">
+				<div class="panel-group">
+					<div class="panel panel-default">
+						<div class="panel-heading">New App</div>
+						<div class="panel-body table-responsive">
+							<ul class="nav nav-tabs tab-wid">
+
+								<li class="active"><a data-toggle="tab" href=".apk-tab">APK | IPA</a></li>
+								<li><a data-toggle="tab" href=".website-tab">WEB</a></li>
+							</ul>
+							<div class="tab-content">
+								<div class="website-tab tab-pane fade ">
+									<div class="row">
+										<div class="col-md-7 col-xs-7 col-xs-offset-3">
+											<form role="form" name="webForm" method="post" action="" class="form-horizontal">
+												<div class="pwd-changeform-txt">
+													<label class="control-label col-md-4" for="exampleInputEmail" style="text-align:left;">Web Name</label>
+													<div class="col-md-8">
+														<input type="text" name="webname" class="form-control col-md-7 " id="exampleInputEmail" data-ng-model="webname" data-ng-required="true"  placeholder="Enter website name">
+													</div>
+												</div>
+												<div class="pwd-changeform-txt">
+													<label class="control-label col-md-4" for="exampleInputEmail" style="text-align:left;">URL</label>
+													<div class="col-md-8">
+														<input type="text" name="weburl" class="form-control col-md-7 " id="exampleInputEmail" data-ng-model="weburl" data-ng-required="true" placeholder="Enter website url">
+													</div>
+												</div>
+												<div class="pwd-changeform-txt">
+													<label class="control-label col-md-4" for="exampleInputEmail" style="text-align:left;">Version</label>
+													<div class="col-md-8">
+														<input type="text" name="webversion"  class="form-control col-md-7" id="exampleInputEmail" data-ng-model="webversion" data-ng-required="true" placeholder="Enter version">
+													</div>
+												</div>
+												<div class="pwd-changeform-txt">
+													<div class="col-md-4"></div>
+													<div class="col-md-8">
+														<input type="submit" data-ng-disabled="webForm.$invalid" class="form-control btn btn-save-full-wid" ng-click="submitForm()"  value="Save" disabled="disabled">
+													</div>
+												</div>
+												<div class="clearfix"></div>
+											</form>
+											<!-- <div class="row" >
+												<div class="col-md-12">
+													<div id="kv-error-2" style="margin-top:10px;display:none"></div>
+													<div id="kv-success-2" class="alert alert-success fade in" style="margin-top:10px;display:none"></div>
+													<div id="message" style="margin: 10px;"></div>
+													<div class="progress" style="display: none; width: 50%; margin: auto;">
+														<div id='progressbar' class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width:10%"></div>
+													</div>
+													<div  id="appview" ></div>
+												</div>
+											</div> -->
+										</div>
+									</div>
+								</div>
+								<div class="apk-tab tab-pane fade in active">
+									<div class="row">
+										<div class="col-md-7 col-xs-7 col-xs-offset-3">
+											<form id="appForm" name="appForm" role="form" method="post" action="" class="form-horizontal">
+												<div class="pwd-changeform-txt">
+													<label class="control-label col-md-4" for="exampleInputEmail" style="text-align:left;">App Name</label>
+													<div class="col-md-8">
+														<input type="text" class="form-control col-md-7 " id="appname" name="appname" restrict-field="appname" data-ng-model="appname"  data-ng-required="true" placeholder="Enter App Name" maxlength="20" required>
+													</div>
+												</div>
+												<div class="pwd-changeform-txt">
+													<label class="control-label col-md-4" for="exampleInputEmail" style="text-align:left;">Version</label>
+													<div class="col-md-8">
+														<input type="text" limit-to="6" ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" step="0.01" class="form-control col-md-7"
+														id="appversion" name="appversion"  ng-model="appversion"  data-ng-required="true"  placeholder="Enter Test Version"  required >
+
+													</div>
+												</div>
+												<div class="pwd-changeform-txt">
+													<div class="col-md-4"></div>
+													<div class="col-md-8" data-ng-class="appForm.$invalid?'div-disabled':''">
+														<div class="fileupload fileupload-new" data-provides="fileupload"  >
+															<input id='appfile' type="file" class="filestyle " name="file" data-buttonName="btn-primary"  pattern="^\S+$" >
+														</div>
+													</div>
+												</div>
+												<div class="clearfix"></div>
+											</form>
+											<script type="text/ng-template" id="appModalContent.html">
+											        <div class="modal-header">
+													     <h4 id="title" class="alert modal-title"><font color='green'>App Uploading</font></h4>
+													</div>
+													        <div class="modal-body body-overflow">
+													           	<div id="kv-success-2" style="margin-top:10px;"></div>
+																<div class="progress" style="width: 100%; margin: auto;">
+																	<div id='progressbar' class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width:10%"></div>
+																</div>
+																<div id="message" class="msg-16" style="padding: 10px;"></div>
+													        </div>
+													        <div class="modal-footer">
+													        	<button id="okBtn" type="button"  style="display:none" class="btn btn-primary pull-xs-right" data-ng-click="ok()" >OK</button>
+													          	<button id="cancelBtn" type="button" style="display:none" class="btn btn-danger pull-xs-right" data-ng-click="cancel()" > Close</button>
+													        </div>
+										    	</script>
+
+
+
+											<!-- <div class="row" >
+												<div class="col-md-12">
+
+
+													  Modal
+													  <div class="modal fade" id="messageModal" role="dialog">
+													    <div class="modal-dialog">
+													      Modal content
+													      <div class="modal-content">
+													        <div class="modal-header">
+													          <h4 id="title" class="alert modal-title"></h4>
+
+													        </div>
+													        <div class="modal-body body-overflow">
+													           	<div id="kv-success-2" style="margin-top:10px;display:none"></div>
+																<div class="progress" style="display: none; width: 100%; margin: auto;">
+																	<div id='progressbar' class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width:10%"></div>
+																</div>
+																<div id="message" class="msg-16" style="padding: 10px;"></div>
+													        </div>
+													        <div class="modal-footer">
+													        	<button id="okBtn" type="button"  class="btn btn-primary pull-xs-right" data-ng-click="ok()" >OK</button>
+													          	<button id="cancelBtn" type="button" class="btn btn-danger pull-xs-right" data-ng-click="cancel()" > Close</button>
+													        </div>
+													      </div>
+
+													    </div>
+													  </div>
+												</div>
+											</div> -->
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- /#page-content-wrapper -->
+</div>
+<!-- <script src="./js/vendor/fileuploadstyle.js" async=""></script> -->

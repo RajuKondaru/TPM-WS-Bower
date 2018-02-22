@@ -1,0 +1,71 @@
+<div class="panel panel-login">
+<div class="panel-body">
+
+<!-- define angular controller -->
+<h2 class="form-label animated zoomIn">Sign in to Application</h2>
+
+<!-- form-container  -->
+<div class="animated zoomIn"   data-ng-controller="loginController">
+	<!-- <div>{{ main.title }}</div> -->
+	<form name="formName" role="form" data-ng-submit="formSubmit()">
+		<div class="form-group">
+		<!-- Redirected Message [Forgot password] - On login click close alert
+	- We've sent you an email with instructions on how to reset your password. -->
+			<div id='resentPassword'> </div>
+			<!-- Account does not exist -->
+			<div id='errors' ></div>
+		</div>
+		<div class="form-group md-form">
+			<!-- <label for="email">Email</label> -->
+			<!-- ng-required="true" | required -->
+			<div class="error form-hint"
+			data-ng-show="formName.email.$dirty && formName.email.$error.required"
+			data-ng-cloak>{{"You can't leave this empty."}}
+			</div>
+			<!-- ng-model="email" -->
+			<div class="error form-hint"
+			data-ng-show="formName.email.$dirty && formName.email.$error.email"
+			data-ng-cloak>{{"The email address you provided isn't valid"}}</div>
+
+			<input type="email" class="form-control" id="email" name="email" placeholder="Enter Email Address"
+			data-ng-class="(formName.email.$dirty && formName.email.$invalid) ? 'error' : ''"
+			data-ng-required="true" data-ng-model="email">
+		</div>
+
+		<div class="form-group" data-ng-init="min = 8; max = 20">
+
+			<div class="error form-hint"
+			data-ng-show="formName.password.$dirty && formName.password.$error.required"
+			data-ng-cloak>{{"You can't leave this empty."}}
+			</div>
+
+			<div class="error form-hint"
+			data-ng-show="formName.password.$dirty && formName.password.$error.minlength"
+			data-ng-cloak>{{"Password should be minimum 8 characters"}}</div>
+
+			<!-- data-ng-class="(formName.password.$dirty && formName.password.$invalid) ? 'error' : ''"  -->
+			<input type="password" class="form-control input-padding-20px"
+			id="password" name="password" placeholder="Enter Password" data-ng-required="true" data-ng-model="password"
+			data-ng-minlength="min">
+
+
+		<!-- Keep me logged in | REMEMBER ME -->
+		<!-- data-ng-disabled="formName.$invalid" attribute will disable if any of the field is invalid.-->
+
+		</div>
+		<div class="form-group">
+			<a ui-sref="main.forget" class="btn-link forgot-cls" style="float: right;">Forgot password?</a>
+			<button id='siginButton' type="submit" class="btn margin-tp-10" data-ng-disabled="formName.$invalid">Sign In</button>
+			<img ng-if="dataLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+
+		</div>
+
+		<div class="form-group">
+		<!-- No account? Create one! | class="btn btn-link"-->
+			<div>New to Application? <a ui-sref="main.register" class="btn-link"> Create an Account </a><br></div>
+		</div>
+	</form>
+</div>
+
+</div>
+</div>

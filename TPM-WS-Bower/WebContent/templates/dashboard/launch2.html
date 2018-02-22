@@ -1,0 +1,183 @@
+
+<!-- Page Content -->
+<div id="page-content-wrapper" >
+	<!-- breadcrumb -->
+	<ul class="breadcrumb" ui-view="bread">
+		
+	</ul>
+	<!-- /breadcrumb-->
+	<div class="container-fluid">
+		<div class="row">
+			
+<div class="col-md-12 col-xs-12 ">
+	<div class="panel-group">
+		<div class="panel panel-default ng-scope">
+			<div class="panel-heading col-md-12 col-xs-12">
+				<div class="col-md-12 pull-left">
+					<div class="text-capitalize"># {{test.name}}</div>  
+				</div>
+				
+			</div>
+			<div class="frame panel-body min-manel-h"> 
+				<div class="col-md-4 col-xs-12 min-manel-h">
+					<div class="col-xs-12 view-pad min-manel-h">
+					<div ng-show="!state" class="col-xs-12 loader-wrapper status-pad centered" id="loader-3" >
+						<span class ="letter14">Opps! <p>Device Connection Last. <br>Please Click On Refresh Button To Get Connection<p></span>
+					</div>
+					<div ng-if="!connectStatus" class="col-xs-12 loader-wrapper status-pad" id="loader-3" >
+			        	<div id="loader"></div>
+				        <div id="loader"></div>
+				        <div id="loader"></div>
+				        <div id="loader"></div>
+				        <div id="loader"></div>
+				         <div style="text-align: center; margin-top: 20px"><div > <h4 class="alert-heading " style="color: white;">{{loaderMessage}} <br></h4></div></div>  
+				      
+		   			</div>
+		   			<div ng-show="disconnectStatus=='Success' && disconnectStatus !='failed' " class="col-xs-12 loader-wrapper status-pad" id="loader-3" >
+				   		
+			        	<div class="cuptake">
+							<div id = "cupcake" class = "dbox">
+								<span class = "letter"> Happy Testing!</span>
+							    
+								
+							</div>
+							<div id = "cupcake" class = "dbox">
+								<div class = "cupcakeCircle dbox">
+							        <div class = "cupcakeInner dbox">
+							            <div class = "cupcakeCore dbox"></div>
+							        </div>
+						        </div>
+							</div>
+						</div>
+				   </div>
+				   <div ng-show="disconnectStatus!='Success' && disconnectStatus =='failed'" class="col-xs-12 loader-wrapper status-pad" id="loader-3" >
+				   		
+			        	<div class = "cuptake">
+							<div id = "cupcake" class = "dbox">
+								<span class = "letter"> D</span>
+							    <span class = "letter dbox">i</span>
+							    <span class = "letter dbox">s</span>
+							    <span class = "letter dbox">c</span>
+						       	<div class = "cupcakeCircle dbox">
+							        <div class = "cupcakeInner dbox">
+							            <div class = "cupcakeCore dbox"></div>
+							        </div>
+						        </div>
+							    <span class = "letter dbox">n</span>
+							  	<span class = "letter dbox">n</span>
+							    <span class = "letter dbox">c</span>
+							  	<span class = "letter dbox">t</span>
+							  	<span class = "letter dbox">i</span>
+							  	<span class = "letter dbox">n</span>
+							  	<span class = "letter dbox">g</span>
+							  	<span class = "letter dbox">.</span>
+								<span class = "letter dbox">.</span>
+								<span class = "letter dbox">!</span>
+							</div>
+							<div id = "cupcake" class = "dbox">
+								<span class = "letter10"> Device Cleaning Up Automatically</span>
+								
+							</div>
+						</div>
+				   </div>
+					<div  style="margin: 0px;">
+						<div id="noVNC_screen" style="padding-top: 5px !important; background-color: #000000 !important; border-bottom-right-radius: 0px;">
+					    	<div id="noVNC_status_bar" class="noVNC_status_normal" style="display:none; margin-top: 0px; ">
+				                <table border="0" >
+				                	<tbody>
+				                		<tr>
+					                    <td><div id="noVNC_status">Connected (unencrypted) to: XT1033</div></td>
+					                    <td width="1%"><div id="noVNC_buttons">
+				                        <input type="button" value="Send CtrlAltDel" id="sendCtrlAltDelButton" style="display: inline;"></div>
+				                            </td>
+				               			 </tr>
+				               		</tbody>
+				               	</table>
+				               	
+				            </div>
+				            <canvas id="noVNC_canvas" class="canvas_centre" style="cursor: url(data:image/x-icon;base64,AAACAAEACAcAAAMAAwAWAQAAFgAAACgAAAAIAAAADgAAAAEAIAAAAAAADgAAAAAAAAAAAAAAAAAAAAAAAAD///////////////////8A////AP////////////////////8AAAD//////////wD///8A/////wAAAP//////////AP////8AAAD///////////8AAAD//////////wD///8A////AP////8AAAD/AAAA//////////8A////AP///wD/////AAAA////////////AAAA//////////8A/////wAAAP//////////AP///wD/////AAAA//////////////////////////8A////AP///////////////wAAAAAAAAAAAAAAAAAA&quot;) 3 3, default;">
+				                Canvas not supported.
+				            </canvas>
+					     </div>
+					     <div ng-if="clock"   class="col-md-12 col-xs-12 ">
+							<div class="btn-maroon btn btn-stop-ex col-xs-12" style="border-radius: 4px !important;">{{ clock | date:'mm:ss'}} </div>
+						</div>
+					     
+
+					</div>
+				</div>
+				</div>
+				<div  class="col-md-1 col-xs-12 top-60 ">
+					<div ng-show="!state" ng-click="reConnect()" class="btn btn-big btn-danger "><i class="fa fa-refresh fa-15"></i></div>
+					
+				</div>
+				<div class="col-md-7 col-xs-12 ">
+					<div class="row" ng-hide="test.senario=='automation'">
+						<div class="table-responsive">
+							<table class="table tableSection hidden-scrollbar table-felx">
+								<thead class="thead-default">
+									<tr class='col-xs-12'>
+										<th class="flex20">Step No</th>
+										<th class="flex30">Test Step</th>
+										<th class="flex30">Expected Result</th>
+										<th class="flex20">Result</th>
+									</tr>
+								</thead>
+								<tbody class='inner'>
+									<tr ng-repeat="teststep in test.testCase">
+										<td class="flex20">{{teststep.stepno}}</td>
+										<td class="flex30">{{teststep.teststep}}</td>
+										<td class="flex30">{{teststep.expectResult}}</td>
+										<td class="flex20">
+											<select ng-init='this.Options = [{status: "pending","label": "Select" }, {status: "pass",  "label": "Pass" }, {status: "fail",  "label": "Fail" } ]; teststep.result = Options[0].status;'  class="form-control" ng-model='teststep.result' ng-options="option.status as option.label for option in Options">
+												
+											</select>
+										</td>
+									</tr>
+									
+								</tbody>
+							</table>
+						</div>
+			
+					</div>
+					<div class="row" ng-hide="test.senario=='automation'">
+						<div class="col-md-12">
+							<!-- <a href="#detailedreports/{{app.id}}"> -->
+								<button id='fn-btn'  type="button" ng-click="stop()" class=" pull-right btn btn-xm btn-blue">
+								<i class="fa ">Finish</i> 
+								</button>
+							<!-- </a> -->
+						</div>
+							<script type="text/ng-template" id="testCompleteModel.html">
+											        <div class="modal-header">
+											            <h3 class="modal-title"> #{{test.name}} Executed Successfully!</h3>
+											        </div>
+											       
+											        <div class="modal-footer">
+											            <button class="btn btn-primary" ng-click="ok()">Ok</button>
+											            
+											        </div>
+									</script>
+					</div>
+				</div>
+		
+		
+			</div>
+		</div>
+	</div>
+</div>
+			
+		</div>
+	</div>
+	<!-- /#page-content-wrapper --> 
+</div>
+
+
+
+
+
+
+
+
+
+

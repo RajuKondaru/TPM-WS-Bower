@@ -1,0 +1,326 @@
+<!-- Page Content -->
+
+<div id="page-content-wrapper">
+    <!--breadcrumb-->
+    <ul class="breadcrumb">
+        <li class="breadcrumb-item"><a class="dec-none" ui-sref="home.dashboard">Dashboard</a></li>
+        <li class="breadcrumb-item"><a class="dec-none" ui-sref="home.dashboard">My Apps</a></li>
+        <li class="breadcrumb-item text-capitalize"><a class="dec-none" ui-sref="home.newTest/{{test.senario}}">{{test.senario}}</a></li>
+        <li class="breadcrumb-item text-capitalize"><a class="dec-none" ui-sref="home.newTest/{{test.senario}}">{{test.type}}</a></li>
+        <li class="breadcrumb-item active text-capitalize">Consolidate Report</li>
+    </ul>
+    <!--/breadcrumb-->
+
+    <div class="container-fluid">
+        <div class="panel-group">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    Test Report <button  class="fa btn btn-primary fa-file-pdf-o pull-right" aria-hidden="true" pdf-save-button="pdfcontent" pdf-name="{{test.name}}.pdf" ></button >
+                </div>
+                <div pdf-save-content="pdfcontent" id="gen-rep" class="panel-default">
+                	<div class="panel-body table-responsive">
+                    <div class="row bottom-10 text-capitalize">
+
+                        <div class="col-md-12 col-xs-12 pad-bot">
+                            <div class="col-md-9 col-sm-6 col-xs-12">
+
+                                <h4># {{test.name}}</h4>
+                                <table data-toggle="table" data-striped="true">
+            			            <tbody>
+						            <tr>
+						                <td><label>Senario  </label></td>
+						                <td><span class="rep-justify">:</span></td>
+										<td>{{test.senario}}</td>
+						            </tr>
+						            <tr>
+						                <td><label>Type  </label></td>
+						                <td><span class="rep-justify">:</span></td>
+										<td>{{test.type}}</td>
+						            </tr>
+						            <tr>
+						                <td><label>Status  </label></td>
+						                <td><span class="rep-justify">:</span></td>
+										<td><div class="label label-table label-success font-100" data-ng-class="test.testResult === 'Passed' ? 'label-success': ( test.testResult === 'Failed' ? 'label-warning': 'label-danger')">{{test.testResult}}</div>
+										</td>
+						            </tr>
+						            <tr>
+						                <td><label>Description  </label></td>
+						                <td><span class="rep-justify">:</span></td>
+										<td><span class="col-bl">{{test.Status}} </span>Test <span class="col-bl">#{{test.name}}</span> has been finished <span class="col-gr">{{test.excTime}}</span></td>
+						            </tr>
+						            </tbody>
+						        </table>   
+                            </div>
+                        </div>
+                        <div class="col-md-12 col-xs-12">
+                            <div class=" col-md-6 col-sm-6 col-xs-12">
+                                <div class="panel-default box box-default box-non-border">
+                                    <div class="panel-heading">
+                                        {{test.app.appName}}
+                                    </div>
+                                    <div class="box-body panel-body panel-min-hi">
+
+                                        <div class="col-md-12 col-sm-6 col-xs-12">
+                                            <div class="col-md-3 col-sm-6 col-xs-12">
+                                                <img class="res-img-wd" ng-src="{{test.app.icon}}" onerror="this.src=this.alt;" alt="{{test.app.defaultIcon}}">
+                                            </div>
+                                            <div class="col-md-9 col-sm-6 col-xs-12">
+                                                <!-- <p>
+                                                    <label>Test Version : </label>{{test.app.version}}</p>
+                                                <p>
+                                                    <label>Type : </label>{{test.app.appType}}</p>
+                                                <p>
+                                                    <label>Build Version : </label>{{test.app.buildId}}</p>
+                                                <p>
+                                                    <label>Package : </label>{{test.app.package}}</p> -->
+                                                 <table data-toggle="table" data-striped="true">
+            
+										            <tbody>
+										            <tr>
+										                <td><label>Test Version  </label></td>
+										                <td><span class="rep-justify">:</span></td>
+														<td>{{test.app.version}}</td>
+										            </tr>
+										            <tr>
+										                <td><label>Type  </label></td>
+										                <td><span class="rep-justify">:</span></td>
+														<td>{{test.app.appType}}</td>
+										            </tr>
+										            <tr>
+										                <td><label>Build Version  </label></td>
+										                <td><span class="rep-justify">:</span></td>
+														<td>{{test.app.buildId}}</td>
+										            </tr>
+										            <tr>
+										                <td><label>Package  </label></td>
+										                <td><span class="rep-justify">:</span></td>
+														<td>{{test.app.appPackageName}}</td>
+										            </tr>
+										           
+										            </tbody>
+										        </table>
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="panel-default box box-default box-non-border">
+                                    <div class="panel-heading">
+                                        {{test.device.Manufacturer}} {{test.device.Model}}
+                                    </div>
+                                    <div class="box-body panel-body panel-min-hi">
+                                        <div class="col-md-4 col-sm-6 col-xs-12">
+                                            <img class="res-img-wd" ng-src="{{test.device.Icon}}" onerror="this.src=this.alt;" alt="{{test.app.defaultIcon}}">
+                                        </div>
+                                        <div class="col-md-8 col-sm-6 col-xs-12">
+<!-- 
+                                            <p>
+                                                <label>Plateform : </label>{{test.device.Plateform}}</p>
+                                            <p>
+                                                <label>Version : </label>{{test.device.Version}}</p>
+                                            <p>
+                                                <label>API Level : </label>{{test.device.APILevel}}</p>
+                                            <p>
+                                                <label>Resolution : </label>{{test.device.Resolution}}</p> -->
+	                                        <table data-toggle="table" data-striped="true">
+	          
+									            <tbody>
+									            <tr>
+									                <td><label>Plateform </label></td>
+									                <td><span class="rep-justify">:</span></td>
+													<td>{{test.device.Plateform}}</td>
+									            </tr>
+									            <tr>
+									                <td><label>Version  </label></td>
+									                <td><span class="rep-justify">:</span></td>
+													<td>{{test.device.Version}}</td>
+									            </tr>
+									            <tr>
+									                <td><label>API Level  </label></td>
+									                <td><span class="rep-justify">:</span></td>
+													<td>{{test.device.APILevel}}</td>
+									            </tr>
+									            <tr>
+									                <td><label>Resolution  </label></td>
+									                <td><span class="rep-justify">:</span></td>
+													<td>{{test.device.Resolution}}</td>
+									            </tr>
+									           
+									            </tbody>
+									        </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div ng-show="test.senario=='manual'" class="panel-heading" >
+                    Test Steps
+                </div>
+                <div ng-show="test.senario=='manual'" class="panel-body table-responsive ">
+                    <table class="table cls-reports ">
+                        <thead>
+                            <tr>
+                                <th>Step No</th>
+                                <th>Step Name</th>
+                                <th>Exepected</th>
+                                <th>Result</th>
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr data-ng-repeat="tcase in test.result ">
+                                <td>{{tcase.stepno}}</td>
+                                <td>{{tcase.teststep}}</td>
+                                <td>{{tcase.expectResult}}</td>
+                                <td><div class="label label-table label-success font-100 text-capitalize" data-ng-class="tcase.result === 'pass' ? 'label-success': (tcase.result === 'pending' ? 'label-warning': 'label-danger')">{{tcase.result}}</div></td>
+                                
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+                <div ng-if="test.senario!='manual' && test.type!='robotium'"  class="panel-heading">
+                    Screenshots
+                </div>
+                <div ng-if="test.senario!='manual' && test.type!='robotium'"  class="panel-body table-responsive ">
+                	<div class="pull-right bottom-10 ">
+                       <button type="button" class="btn btn-sm btn-success ">
+                           <i class="fa fa-download "></i> Download </button>
+                   	</div>
+                   	<div ng-if="test.screens=='failed'" class="centered ">
+                   		<span style=" font-size: 16px;">You don't have screenshots for this test.</span>
+                   	</div>
+                   	<div class="row ">
+                       <div class="col-md-12 ">
+                           <div ng-if="test.screens!='failed'" class="col-md-3 cls-img-padding pad-bot " data-ng-repeat="screen in test.screens "><img data-ng-src="{{screen}} "></div>
+
+                       </div>
+                   	</div>
+                
+                </div>
+                <div  ng-if="test.senario!='manual'" class="panel-heading">
+                    Videos
+                </div>
+                <div  ng-if="test.senario!='manual'" class="panel-body centered video ">
+                	<video width="640 " height="320 " controls>
+                        <source data-ng-src="{{test.result.filename}} " type="video/mp4 "></source>
+                    </video>
+                
+                </div>
+               
+                <div   ng-if="test.senario!='manual'" class="panel-heading">
+                    Logs
+                </div>
+                <div ng-if="test.senario!='manual'" class="panel-body">
+                	<div class="buttontab ">
+                        <ul class="nav nav-tabs">
+                            <li data-ng-class="(test.type=='Appium' || test.type=='appium') && serverLog==true ? 'active': ''" data-ng-if="test.type=='Appium' || test.type=='appium'" ><a ng-click="isShow('serverLog');" data-toggle="tab">Server Log</a></li>
+                            <li data-ng-class="(test.type=='Appium' || test.type=='appium') || deviceLog!=true ? '': 'active'" ><a  ng-click="isShow('deviceLog');" data-toggle="tab">Device Log</a></li>
+                            <li data-ng-class="(testLog!=true) ? '': 'active'"  data-ng-if="(test.type=='Robotium' || test.type=='robotium')"><a  ng-click="isShow('testLog');" data-toggle="tab">Test Log</a></li>
+                            <li data-ng-hide="true"><a href=".json " data-toggle="tab" >JSON</a></li>
+                        </ul>
+                        <div class="tab-content">
+                            <div ng-show="serverLog" class=" " data-ng-class="(test.type=='Appium' || test.type=='appium') ? 'active': ''">
+                                <div data-infinite-scroll="getMoreAppiumLogs() ">
+                                    <div id="highlighter_577093 " class="syntaxhighlighter min-300 noskimlinks noskimwords javascript ">
+                                        <table>
+                                            <tbody id="someid ">
+
+                                                <tr data-ng-repeat="(index, log) in appiumLogs track by $index ">
+                                                    <td class="gutter ">
+                                                        <div class="line number1 index0 alt2 "> {{index}}</div>
+                                                    </td>
+                                                    <td class="code">
+                                                        <div class="container ">
+
+                                                            <div class="line number1 index0 alt2 ">
+                                                                <!-- data-ng-class="{ 'debug':log.indexOf( 'debug:')>=0,'info':log.indexOf('info:')>=0,'error':log.indexOf('error:')>=0,'warn':log.indexOf('warn:')>=0,'verbose':log.indexOf('verbose:')>=0}" -->
+                                                                <code class="javascript plain">{{log}}</code>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div ng-show="deviceLog" class=" in" data-ng-class="(test.type==='Appium' || test.type==='appium')? '': 'active'">
+                                <div data-infinite-scroll="getMoreDeviceLogs()">
+                                	<div><img data-ng-if="!devicelogs" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" /></div>
+                                    <div id="highlighter_577093" class="syntaxhighlighter min-300 noskimlinks noskimwords javascript">
+                                        <table>
+                                            <tbody id="someid">
+                                            	
+                                                <tr data-ng-repeat="(index, log) in devicelogs track by $index">
+                                                	
+                                                    <td class="gutter">
+                                                        <div class="line number1 index0 alt2"> {{index}}</div>
+                                                    </td>
+                                                    <td class="code">
+                                                        <div class="container">
+                                                            <div class="line number1 index0 alt2">
+                                                                <!--  data-ng-class="{'debug':log.indexOf('D/')>=0,'info':log.indexOf('I/')>=0,'error':log.indexOf('E/')>=0,'warn':log.indexOf('W/')>=0,'verbose':log.indexOf('V/')>=0}"  -->
+                                                                <code class="javascript ">{{log}}</code>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    
+
+                                </div>
+
+                            </div>
+                            <div ng-show="testLog" class="">
+                             <div data-infinite-scroll="getMoreRoboTestLogs()">
+                             	<div id="highlighter_577093" class="syntaxhighlighter noskimlinks noskimwords javascript" data-ng-repeat="(index, testLog) in testLogs track by $index">
+	                             	<table >
+	                             		 <caption class="caption-tab">{{testLog.name}}</caption>
+	                                     <tbody id="someid">
+	                                         <tr data-ng-repeat="(index, log) in testLog.value track by $index">
+	                                             <td class="gutter">
+	                                                 <div class="line number1 index0 alt2"> {{index}}</div>
+	                                             </td> 
+	                                             <td class="code">
+	                                                 <div class="container">
+	                                                     <div class="line number1 index0 alt2">
+	                                                         <!--  data-ng-class="{'debug':log.indexOf('D/')>=0,'info':log.indexOf('I/')>=0,'error':log.indexOf('E/')>=0,'warn':log.indexOf('W/')>=0,'verbose':log.indexOf('V/')>=0}"  -->
+	                                                         <code class="javascript ">{{log}}</code>
+	                                                     </div>
+	                                                 </div>
+	                                             </td>
+	                                         </tr>
+	                                     </tbody>
+	                                      
+	                                 </table>
+	                                 <pre class="res-div">Test Result :<span class="label label-table font-100 margin-10" data-ng-class="testLog.result==='Passed' ? 'label-success': (testLog.result==='Failed' ? 'label-warning': 'label-danger')" >{{testLog.result}}</span></pre>
+                                 </div>
+                             	
+                             </div>
+                                
+                            </div>
+                            <div class="tab-pane json fade">JSON log files here</div>
+                        </div>
+                    </div>
+                
+                </div>
+                
+                </div>
+                
+               
+            </div>
+        </div>
+    </div>
+</div>
+    <!-- /#page-content-wrapper -->

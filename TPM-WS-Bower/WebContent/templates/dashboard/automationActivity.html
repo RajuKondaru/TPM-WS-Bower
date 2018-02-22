@@ -1,0 +1,60 @@
+<!-- Page Content -->
+<div id="page-content-wrapper" data-ng-repeat="app in currentApp">
+	<!-- breadcrumb -->
+	<ul class="breadcrumb">
+		<li class="breadcrumb-item"><a class="dec-none" ui-sref="home.dashboard">Dashboard</a></li>
+		<li class="breadcrumb-item"><a class="dec-none" ui-sref="home.dashboard">My Apps</a></li>
+		<li class="breadcrumb-item active text-capitalize">{{test.senario}}</li>
+	</ul>
+	<!-- /breadcrumb-->
+	<div class="container-fluid " >
+		<div class="row bottom-10">
+			<div class="col-md-12 col-xs-12">
+				<div class="pull-left padding-rt-30"><img class="icon-medium" data-ng-src="{{app.icon}}" onerror="this.src=this.alt;"  alt="{{app.defaultIcon}}"></div>
+				<div class="pull-left">
+					<div>App Name : <label>{{app.appName}}</label></div>
+					<div>Version: <label>{{app.version}}</label></div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12 col-xs-12">
+				<div class="panel-group">
+					<div class="panel panel-default">
+						<div class="panel-heading text-capitalize">{{test.senario}}</div>
+						<div class="panel-body table-responsive">
+							<div class="row">
+								<div>
+									<div class="col-md-6 col-sm-6 col-xs-12">
+										<a ui-sref="home.automationLaunchDevice/{{app.id}}/{{appium}}">
+											<div class="card-box tilebox-three text-center pading-tp-btm-40">
+												<img src="images/appium.png" alt="appium">
+												<input style='display: none;' ng-model="appium" ng-init="appium ='Appium'"></input> 
+											</div>
+										</a>
+									</div>
+									<div class="col-md-6 col-sm-6 col-xs-12">
+										<a ui-sref="home.robotiumAUTfileupload/{{app.id}}/{{robotium}}">
+											<div class="card-box tilebox-three text-center pading-tp-btm-40">
+												<img src="images/robotium.png" alt="robotium"> 
+												<input style='display: none;' ng-model="robotium" ng-init="robotium ='Robotium'"></input> 
+											</div>
+										</a>
+									</div>
+									<!-- <div class="col-md-4 col-sm-12 col-xs-12">
+										<a href="automationLaunchDevice.html">
+											<div class="card-box tilebox-three text-center pading-tp-btm-40">
+												<img src="images/clictest.png" alt="clictest"> 
+											</div>
+										</a>
+									</div> -->
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- /#page-content-wrapper --> 
+</div>
