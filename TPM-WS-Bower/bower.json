@@ -1,13 +1,13 @@
 {
-  "name": "testpacemobile-ws-bower2",
+  "name": "tpm-ws-bower",
   "version": "0.0.1",
-  "description": "TestPace Platform for Mobile web and navite app testing using Appium, Robotium and Selenium Automation frameworks",
+  "description": "TPM Platform for Mobile web and navite app testing using Appium, Robotium and Selenium Automation frameworks",
   "main": "index.html",
   "authors": [
-    "Raju.Kondaru"
+    "Rojer"
   ],
   "license": "MIT",
-  "homepage": "http://localhost:8080/TestPaceMobile",
+  "homepage": "http://localhost:8080/TPM",
   "private": true,
   "ignore": [
     "**/.*",
@@ -17,7 +17,7 @@
     "tests"
   ],
   "dependencies": {
-    "jquery": "^3.2.1",
+    "jquery": "~3.2.1",
     "requirejs": "~2.1.8",
     "bootstrap": "~3.3.7",
     "underscore-min": "~1.8.3",
@@ -35,7 +35,10 @@
     "angular-spinkit": "^0.3.4",
     "angularAMD": "^0.2.1",
     "oclazyload": "ocLazyLoad#^1.1.0",
-    "angular-save-html-to-pdf": "*",
     "angular-local-storage": "^0.7.1"
+  },
+  "resolutions": {
+	  "jquery": "~3.2.1",
+	  "angular": "~1.4.8"
   }
 }
