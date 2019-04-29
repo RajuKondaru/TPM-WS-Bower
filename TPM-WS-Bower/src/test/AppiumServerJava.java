@@ -34,6 +34,7 @@ public class AppiumServerJava {
 		//Start the server with the builder
 		service = AppiumDriverLocalService.buildService(builder);
 		service.start();
+		
 		/*while(true) {
 			try {
 				System.out.println("From service :: "+service.getStdOut());
